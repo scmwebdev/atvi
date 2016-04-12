@@ -49,6 +49,7 @@ gulp.task('sass', function() {
 gulp.task('js', function() {
     return gulp.src([
             './node_modules/jquery/dist/jquery.js',
+            './node_modules/fastclick/lib/*.js',
             './node_modules/slick-carousel/slick/slick.js',
             './js/atvi.js',
             './js/navigation.js',
@@ -62,7 +63,7 @@ gulp.task('js', function() {
 
 
 gulp.task('default', ['sass', 'js', 'browserSync'], function() {
-    gulp.watch('*.scss', {cwd: 'sass'}, ['sass']);
-    gulp.watch('**/*.scss', {cwd: 'sass'}, ['sass']);
-    gulp.watch('*.js', {cwd: 'js'}, ['js']);
+    gulp.watch('*.scss', {cwd: './sass'}, ['sass']);
+    gulp.watch('**/*.scss', {cwd: './sass'}, ['sass']);
+    gulp.watch('*.js', {cwd: './js'}, ['js']);
 });

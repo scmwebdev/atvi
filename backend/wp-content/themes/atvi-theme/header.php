@@ -26,9 +26,9 @@
 
 	<header id="masthead" class="site-header" role="banner">
 		<?php if(wpmd_is_notdevice()) { 
-			get_template_part('template-parts/layout', 'desktop');
+			get_template_part('template-parts/header', 'desktop');
 		} else { 
-			get_template_part('template-parts/layout', 'mobile');
+			get_template_part('template-parts/header', 'mobile');
 		} ?>
 		
 

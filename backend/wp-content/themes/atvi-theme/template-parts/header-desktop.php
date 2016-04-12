@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid header-desktop">
 	<div class="site-branding col-sm-6">
 		<?php
 		if ( is_front_page() && is_home() ) : ?>
