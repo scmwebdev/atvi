@@ -8,12 +8,16 @@
 		<?php
 		endif; ?>
 	</div><!-- .site-branding -->
-	<div class="col-xs-6 menu-trigger __spacepad">
-		<div>
+	<div class="col-xs-6 menu-bar __spacepad">
+		<div class="menu-trigger">
 			<i class="fa fa-bars fa-lg" aria-hidden="true"></i>
 		</div>
 	</div>
-	<nav id="site-navigation" class="main-navigation col-xs-12" role="navigation">
-		<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
-	</nav><!-- #site-navigation -->
+	<nav id="site-navigation" class="main-navigation" role="navigation">
+			<div class="main-navigation-closebtn menu-trigger">
+				<i class="fa fa-times fa-3x" aria-hidden="true"></i>
+			</div>
+			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
+
+	</nav>
 </div>
