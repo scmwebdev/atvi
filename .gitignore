@@ -1,11 +1,12 @@
 # ignore folders generated from NPM
-node_modules/
+backend/wp-content/themes/atvi-theme/node_modules/
+
+# ignore js folders
+backend/wp-content/themes/atvi-theme/js/
 
 # ignore source folder
 src/
 
 # ignore sass folders
-sass/
+backend/wp-content/themes/atvi-theme/sass/
 
-# ignore js folders
-js/
