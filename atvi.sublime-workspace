@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"em",
+				"employee"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
 				"en",
 				"env_config"
 			],
@@ -43,22 +55,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "/Applications/webdev/_project/pedulikasih_legacy2/.gitignore",
-			"settings":
-			{
-				"buffer_size": 117,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "backend/wp-content/themes/atvi-theme/sass/_override.scss",
-			"settings":
-			{
-				"buffer_size": 1661,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -67,10 +63,26 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 336.0,
-		"last_filter": "mark",
+		"height": 354.0,
+		"last_filter": "button",
 		"selected_items":
 		[
+			[
+				"button",
+				"Snippet: bs3-button-primary"
+			],
+			[
+				"syn html",
+				"Set Syntax: HTML"
+			],
+			[
+				"html5",
+				"Snippet: bs3-html5-template"
+			],
+			[
+				"syn javas",
+				"Set Syntax: JavaScript"
+			],
 			[
 				"mark",
 				"Set Syntax: Markdown"
@@ -153,12 +165,19 @@
 	],
 	"file_history":
 	[
+		"/Users/scm/Desktop/class.person.js",
+		"/Users/scm/Desktop/oop_tutor.html",
+		"/Applications/webdev/_project/atvi/.gitignore",
+		"/Users/scm/.ssh/id_rsa",
+		"/Users/scm/.ssh/id_rsa.pub",
+		"/Applications/webdev/_project/atvi/backend/wp-content/themes/atvi-theme/sass/_override.scss",
+		"/Applications/webdev/_project/atvi/backend/wp-content/themes/atvi-theme/js/atvi.js",
+		"/Applications/webdev/_project/pedulikasih_legacy2/.gitignore",
 		"/Applications/webdev/_project/pedulikasih_legacy2/indosiar.com/inc/index_master_videofiesta.php",
 		"/Applications/webdev/_project/pedulikasih_legacy2/indosiar.com/inc/inc_badwords.php",
 		"/Applications/webdev/_project/pedulikasih_legacy2/indosiar.com/index.html",
 		"/Applications/webdev/_project/pedulikasih_legacy2/indosiar.com/wfb.php",
 		"/Applications/webdev/_project/pedulikasih_legacy2/indosiar.com/index.php",
-		"/Applications/webdev/_project/pedulikasih_legacy2/.gitignore",
 		"/Applications/webdev/_project/pedulikasih_legacy2/indosiar.com/application/views/pedulikasih/content_paging.php",
 		"/Applications/webdev/_project/pedulikasih_legacy2/env.php",
 		"/Applications/webdev/_project/pedulikasih_legacy2/indosiar.com/application/views/pedulikasih/content_index.php",
@@ -292,67 +311,8 @@
 	"groups":
 	[
 		{
-			"selected": 1,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "/Applications/webdev/_project/pedulikasih_legacy2/.gitignore",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 117,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								117,
-								117
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Materialize/Langs/Git.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "backend/wp-content/themes/atvi-theme/sass/_override.scss",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1661,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								439,
-								439
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/SCSS/SCSS.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -444,7 +404,7 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": true,
+	"side_bar_visible": false,
 	"side_bar_width": 300.0,
 	"status_bar_visible": true,
 	"template_settings":
