@@ -42,9 +42,9 @@ get_header(); ?>
 								</div>
 
 								<?php if(wpmd_is_notdevice()) { ?>
-								<div class="item-list-desc-text">
-									<?php echo $tagline_desc; ?>
-								</div>
+									<div class="item-list-desc-text">
+										<?php echo $tagline_desc; ?>
+									</div>
 								<?php } ?>
 							</div>
 						</div>
