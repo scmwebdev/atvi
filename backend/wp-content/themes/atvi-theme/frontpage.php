@@ -23,33 +23,68 @@ get_header(); ?>
 			} //endof for
 			?>
 		</div>
-		<div class="sub __spacepad">
+		<div class="highlight __spacepad">
 			<div class="container">
 				<div class="item clearfix">
 				<?php for($i = 1; $i <= 6; $i++) { 
-						$tagline =  ${'tagline_'.$i} = get_field("tagline_" . $i);
-						$tagline_desc =  ${'tagline_desc_'.$i} = get_field("tagline_desc_" . $i);
-						$tagline_img =  ${'tagline_img_'.$i} = get_field("tagline_img_" . $i);
+					$tagline =  ${'tagline_'.$i} = get_field("tagline_" . $i);
+					$tagline_desc =  ${'tagline_desc_'.$i} = get_field("tagline_desc_" . $i);
+					$tagline_img =  ${'tagline_img_'.$i} = get_field("tagline_img_" . $i);
 				?>
-					<div class="item-list col-xs-6 col-sm-4 __spacepad">
+				<div class="item-list col-xs-6 col-sm-4 __spacepad">
+					<div class="item-list-container">
+						<div class="item-list-icon">
+							<img class="img-responsive" src="<?php echo $tagline_img; ?>" alt="">
+						</div>
+						<div class="item-list-desc">
+							<div class="item-list-desc-button">
+								<?php echo $tagline; ?>
+							</div>
+
+							<?php if(wpmd_is_notdevice()) { ?>
+								<div class="item-list-desc-text">
+									<?php echo $tagline_desc; ?>
+								</div>
+							<?php } ?>
+						</div>
+					</div>
+				</div>
+				<?php } ?>
+				</div>
+			</div>
+		</div>
+		<div class="penjurusan __spacepad">
+			<div class="container">
+				<div class="item clearfix">
+					<?php 
+						$jurusan1_text = get_field('jurusan_1');
+						$jurusan1_img = get_field('jurusan_1_img');
+						$jurusan2_text = get_field('jurusan_2');
+						$jurusan2_img = get_field('jurusan_2_img');
+					?>
+
+					<div class="item-list col-xs-6 __spacepad">
 						<div class="item-list-container">
 							<div class="item-list-icon">
-								<img class="img-responsive" src="<?php echo $tagline_img; ?>" alt="">
+								<img class="img-responsive" src="<?php echo $jurusan1_img; ?>" alt="<?php echo $jurusan1_text; ?>">
 							</div>
 							<div class="item-list-desc">
-								<div class="item-list-desc-button">
-									<?php echo $tagline; ?>
-								</div>
-
-								<?php if(wpmd_is_notdevice()) { ?>
-									<div class="item-list-desc-text">
-										<?php echo $tagline_desc; ?>
-									</div>
-								<?php } ?>
+								<h2><?php echo $jurusan1_text; ?></h2>
 							</div>
 						</div>
 					</div>
-				<?php } ?>
+
+					<div class="item-list col-xs-6 __spacepad">
+						<div class="item-list-container">
+							<div class="item-list-icon">
+								<img class="img-responsive" src="<?php echo $jurusan2_img; ?>" alt="<?php echo $jurusan2_text; ?>">
+							</div>
+							<div class="item-list-desc">
+								<h2><?php echo $jurusan2_text; ?></h2>
+							</div>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>
