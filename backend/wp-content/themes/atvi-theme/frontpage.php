@@ -14,7 +14,13 @@ get_header(); ?>
 				if($slider) {
 			?>
 			<div class="carousel-slider-<?php echo $i; ?>">
-				<img src="<?php echo $slider ?>" alt="">
+				<?php
+					if(wpmd_is_phone()) {
+						echo wp_get_attachment_image( $slider, 'mainBanner_xs' );		
+					} else {
+						echo wp_get_attachment_image( $slider, 'mainBanner_lg' );	
+					}
+				?>
 			</div>
 
 			<?php } else {
