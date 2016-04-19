@@ -70,7 +70,7 @@ get_header(); ?>
 						$jurusan2_img = get_field('jurusan_2_img');
 					?>
 
-					<div class="item-list col-xs-6 __spacepad">
+					<div class="item-list col-xs-12 col-sm-6 __spacepad">
 						<div class="item-list-container">
 							<div class="item-list-icon">
 								<?php echo file_get_contents($jurusan1_img); ?>
@@ -82,7 +82,7 @@ get_header(); ?>
 						</div>
 					</div>
 
-					<div class="item-list col-xs-6 __spacepad">
+					<div class="item-list col-xs-12 col-sm-6 __spacepad">
 						<div class="item-list-container">
 							<div class="item-list-icon">
 							<?php echo file_get_contents($jurusan2_img); ?>
