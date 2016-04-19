@@ -74,7 +74,6 @@ get_header(); ?>
 						<div class="item-list-container">
 							<div class="item-list-icon">
 								<?php echo file_get_contents($jurusan1_img); ?>
-								<!-- <img class="img-responsive" src="<?php echo $jurusan1_img; ?>" alt="<?php echo $jurusan1_text; ?>"> -->
 							</div>
 							<div class="item-list-desc">
 								<h2><?php echo $jurusan1_text; ?></h2>
@@ -86,7 +85,6 @@ get_header(); ?>
 						<div class="item-list-container">
 							<div class="item-list-icon">
 							<?php echo file_get_contents($jurusan2_img); ?>
-								<!-- <img class="img-responsive" src="<?php echo $jurusan2_img; ?>" alt="<?php echo $jurusan2_text; ?>"> -->
 							</div>
 							<div class="item-list-desc">
 								<h2><?php echo $jurusan2_text; ?></h2>
@@ -94,6 +92,40 @@ get_header(); ?>
 						</div>
 					</div>
 
+				</div>
+			</div>
+		</div>
+		<div class="video video-latest __spacepad">
+			<div class="container">
+				<h2 class="title text-center">Latest Video</h2>
+				<div class="item clearfix __spacepad">
+					<?php
+						$args = array(
+								'posts_per_page' => 6,
+								'category' => 4
+							);
+						$videoPost = get_posts($args);
+
+						foreach($videoPost as $post) {
+							setup_postdata($post);
+							$count_posts = wp_count_posts();
+					?>
+					<div class="item-list">
+						<a href="<?php the_permalink(); ?>">
+							<div class="item-list-img">
+								<?php the_post_thumbnail('video_thumb'); ?>
+							</div>
+							<div class="item-list-title clearfix">
+								<span><?php the_title(); ?></span>
+							</div>
+						</a>
+					</div>
+					<?php }
+						wp_reset_postdata();
+					?>
+				</div>
+				<div class="readmore col-xs-12">
+					<button type="button" class="btn btn-primary">Click here for more</button>
 				</div>
 			</div>
 		</div>
