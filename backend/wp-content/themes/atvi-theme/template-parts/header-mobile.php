@@ -8,7 +8,7 @@
 		<?php
 		endif; ?>
 	</div><!-- .site-branding -->
-	<div class="menu-bar __left __spacepad">
+	<div class="site-menu __right __spacepad">
 		<div class="menu-trigger">
 			<i class="fa fa-bars fa-lg" aria-hidden="true"></i>
 		</div>
