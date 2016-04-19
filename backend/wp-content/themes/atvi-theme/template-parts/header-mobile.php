@@ -1,5 +1,5 @@
 <div class="header-mobile">
-	<div class="site-branding col-xs-6 __spacepad">
+	<div class="site-branding __left __spacepad">
 		<?php
 		if ( is_front_page() && is_home() ) : ?>
 			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
@@ -8,7 +8,7 @@
 		<?php
 		endif; ?>
 	</div><!-- .site-branding -->
-	<div class="col-xs-6 menu-bar __spacepad">
+	<div class="menu-bar __left __spacepad">
 		<div class="menu-trigger">
 			<i class="fa fa-bars fa-lg" aria-hidden="true"></i>
 		</div>

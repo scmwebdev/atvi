@@ -7,7 +7,7 @@
 
 get_header(); ?>
 <div id="primary" class="content-area <?php echo get_the_title() ?>">
-	<main id="main" class="site-main" role="main">
+	<main id="main" class="site-main clearfix" role="main">
 		<div class="carousel" id="atvi-carousel">
 			<?php for($i = 1; $i <= 4; $i++) { 
 				$slider =  ${'slider_'.$i} = get_field("slider_" . $i);
