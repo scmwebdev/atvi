@@ -14,8 +14,8 @@ get_header(); ?>
 				if($slider) {
 			?>
 			<div class="carousel-slider-<?php echo $i; ?>">
-					<img src="<?php echo $slider ?>" alt="">
-				</div>
+				<img src="<?php echo $slider ?>" alt="">
+			</div>
 
 			<?php } else {
 					echo '';
@@ -32,19 +32,19 @@ get_header(); ?>
 					$tagline_img =  ${'tagline_img_'.$i} = get_field("tagline_img_" . $i);
 				?>
 				<div class="item-list col-xs-6 col-sm-4 __spacepad">
-					<div class="item-list-container">
-						<div class="item-list-icon">
+					<div class="item-list-container clearfix">
+						<div class="item-list-icon col-xs-12 col-sm-4">
 							<img class="img-responsive" src="<?php echo $tagline_img; ?>" alt="">
 						</div>
-						<div class="item-list-desc">
-							<div class="item-list-desc-button">
-								<?php echo $tagline; ?>
+						<div class="item-list-desc col-xs-12 col-sm-8">
+							<div class="item-list-desc-title">
+								<h3 class="title"><?php echo $tagline; ?></h3>
 							</div>
 
 							<?php if(wpmd_is_notdevice()) { ?>
-								<div class="item-list-desc-text">
-									<?php echo $tagline_desc; ?>
-								</div>
+							<div class="item-list-desc-text">
+								<p class="__nomarginbottom"><?php echo $tagline_desc; ?></p>
+							</div>
 							<?php } ?>
 						</div>
 					</div>
@@ -66,7 +66,8 @@ get_header(); ?>
 					<div class="item-list col-xs-6 __spacepad">
 						<div class="item-list-container">
 							<div class="item-list-icon">
-								<img class="img-responsive" src="<?php echo $jurusan1_img; ?>" alt="<?php echo $jurusan1_text; ?>">
+								<?php echo file_get_contents($jurusan1_img); ?>
+								<!-- <img class="img-responsive" src="<?php echo $jurusan1_img; ?>" alt="<?php echo $jurusan1_text; ?>"> -->
 							</div>
 							<div class="item-list-desc">
 								<h2><?php echo $jurusan1_text; ?></h2>
@@ -77,7 +78,8 @@ get_header(); ?>
 					<div class="item-list col-xs-6 __spacepad">
 						<div class="item-list-container">
 							<div class="item-list-icon">
-								<img class="img-responsive" src="<?php echo $jurusan2_img; ?>" alt="<?php echo $jurusan2_text; ?>">
+							<?php echo file_get_contents($jurusan2_img); ?>
+								<!-- <img class="img-responsive" src="<?php echo $jurusan2_img; ?>" alt="<?php echo $jurusan2_text; ?>"> -->
 							</div>
 							<div class="item-list-desc">
 								<h2><?php echo $jurusan2_text; ?></h2>
