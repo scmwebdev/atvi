@@ -24,7 +24,8 @@ get_header(); ?>
 			</div>
 
 			<?php } else {
-					echo '';
+
+					// return false;
 				} //endof if
 			} //endof for
 			?>
