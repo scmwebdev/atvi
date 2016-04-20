@@ -62,6 +62,7 @@ get_header(); ?>
 		</div>
 		<div class="penjurusan __spacepad">
 			<div class="container">
+				<h2 class="title text-center">Penjurusan</h2>
 				<div class="item clearfix">
 					<?php 
 						$jurusan1_text = get_field('jurusan_1');
@@ -148,6 +149,16 @@ get_header(); ?>
 						?>
 					</div>
 				</div>
+			</div>
+		</div>
+		<div class="warta-berita __spacepad">
+			<div class="container">
+				
+			</div>
+		</div>
+		<div class="testimonial __spacepad">
+			<div class="container">
+				
 			</div>
 		</div>
 	</main><!-- #main -->
