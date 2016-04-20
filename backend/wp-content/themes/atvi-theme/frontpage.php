@@ -129,6 +129,27 @@ get_header(); ?>
 				</div>
 			</div>
 		</div>
+		<div class="message __spacepad">
+			<div class="container">
+				<h2 class="title text-center">Pesan dari Direktur</h2>
+				<div class="message-container clearfix __spacepad">
+					<div class="message-photo col-xs-12 col-sm-4">
+						<div class="wrap">
+							<?php 
+								$photo = get_field('message_img');
+								echo '<img class="img-responsive" src="'. $photo .'" alt="director">';
+							?>
+						</div>
+					</div>
+					<div class="message-text col-xs-12 col-sm-8">
+						<?php 
+							$message = get_field('message');
+							echo $message;
+						?>
+					</div>
+				</div>
+			</div>
+		</div>
 	</main><!-- #main -->
 </div><!-- #primary -->
 
