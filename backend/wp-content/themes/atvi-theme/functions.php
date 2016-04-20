@@ -110,6 +110,25 @@ function atvi_theme_widgets_init() {
 }
 add_action( 'widgets_init', 'atvi_theme_widgets_init' );
 
+function tutsplus_widgets_init() {
+ 
+    //Footer
+    register_sidebar( array(
+        'name' => __( 'More Info - Footer', 'Atvi' ),
+        'id' => 'more-info-widget-area',
+        'description' => __( 'More Info Widget Area', 'Atvi' ),
+        'before_widget' => '<div id="%1$s" class="widget-container %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h2 class="widget-title">',
+        'after_title' => '</h2>',
+    ) );
+         
+}
+ 
+// Register sidebars by running tutsplus_widgets_init() on the widgets_init hook.
+add_action( 'widgets_init', 'tutsplus_widgets_init' );
+
+
 /**
  * Enqueue scripts and styles.
  */

@@ -68,7 +68,7 @@ gulp.task('js', function() {
 
 
 gulp.task('default', ['sass', 'js', 'browserSync'], function() {
-    gulp.watch('*.scss', {cwd: 'sass'}, ['sass']);
-    gulp.watch('**/*.scss', {cwd: 'sass'}, ['sass']);
-    gulp.watch('*.js', {cwd: 'js'}, ['js']);
+    gulp.watch('*.scss', {cwd: 'sass/'}, ['sass']);
+    gulp.watch('**/*.scss', {cwd: 'sass/'}, ['sass']);
+    gulp.watch('*.js', {cwd: 'js/'}, ['js']);
 });
