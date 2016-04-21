@@ -1,4 +1,6 @@
 <?php
+include 'env.php';
+
 /**
  * The base configuration for WordPress
  *
@@ -18,18 +20,20 @@
  * @package WordPress
  */
 
+
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', 'atvidb');
+define('DB_NAME', $env_config['db_name']);
 
 /** MySQL database username */
-define('DB_USER', 'root');
+// define('DB_USER', 'root');
+define('DB_USER', $env_config['db_user']);
 
 /** MySQL database password */
-define('DB_PASSWORD', 'root');
+define('DB_PASSWORD', $env_config['db_pass']);
 
 /** MySQL hostname */
-define('DB_HOST', 'localhost');
+define('DB_HOST', $env_config['db_host']);
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8mb4');
