@@ -116,8 +116,8 @@ function atvi_theme_widgets_init() {
         'description' => __( 'More Info Widget Area', 'Atvi' ),
         'before_widget' => '<div id="%1$s" class="widget-container %2$s">',
         'after_widget' => '</div>',
-        'before_title' => '<h2 class="widget-title">',
-        'after_title' => '</h2>',
+        'before_title' => '<h3 class="widget-title">',
+        'after_title' => '</h3>',
     ) );
 
     //Our Partner - Footer
@@ -128,8 +128,8 @@ function atvi_theme_widgets_init() {
         'description' => __( 'Our Partner Widget Area', 'Atvi' ),
         'before_widget' => '<div id="%1$s" class="widget-container %2$s">',
         'after_widget' => '</div>',
-        'before_title' => '<h2 class="widget-title">',
-        'after_title' => '</h2>',
+        'before_title' => '<h3 class="widget-title">',
+        'after_title' => '</h3>',
     ) );
 
     //Social Media - Footer
@@ -140,8 +140,8 @@ function atvi_theme_widgets_init() {
         'description' => __( 'Social Media Widget Area', 'Atvi' ),
         'before_widget' => '<div id="%1$s" class="widget-container %2$s">',
         'after_widget' => '</div>',
-        'before_title' => '<h2 class="widget-title">',
-        'after_title' => '</h2>',
+        'before_title' => '<h3 class="widget-title">',
+        'after_title' => '</h3>',
     ) );
 
 }
@@ -222,3 +222,16 @@ return $string;
 }
 
 add_shortcode('wpb_childpages', 'wpb_list_child_pages');
+
+/* ==================================================================
+ * Add the_slug() function
+ * ================================================================== */
+
+function the_slug($echo=true){
+  $slug = basename(get_permalink());
+  do_action('before_slug', $slug);
+  $slug = apply_filters('slug_filter', $slug);
+  if( $echo ) echo $slug;
+  do_action('after_slug', $slug);
+  return $slug;
+}

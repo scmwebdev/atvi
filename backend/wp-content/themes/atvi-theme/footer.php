@@ -25,11 +25,12 @@
 
 		    <div class="widget-area col-xs-12 col-sm-4" id="social-media">
 		        <?php dynamic_sidebar( 'social-media-widget-area' ); ?>
+				<div class="copyright col-xs-12 __nopaddingleft">
+			    	<span><i class="fa fa-copyright" aria-hidden="true"></i></span>
+			    	<span>Copyright ATVI 2016.</span>
+			    </div>
 		    </div><!-- #social-media .widget-area -->
-		    <div class="copyright __right">
-		    	<span><i class="fa fa-copyright" aria-hidden="true"></i></span>
-		    	<span>Copyright ATVI 2016.</span>
-		    </div>
+
 		</div>
 	</footer> 
 
