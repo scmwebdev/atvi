@@ -15,9 +15,18 @@
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="container">
-			<div class="widget-area">
+			<div class="widget-area col-xs-12 col-sm-4" id="more-info">
 		        <?php dynamic_sidebar( 'more-info-widget-area' ); ?>
-		    </div><!-- .first .widget-area -->
+		    </div><!-- #more-info .widget-area -->
+
+		    <div class="widget-area col-xs-12 col-sm-4" id="our-partners">
+		        <?php dynamic_sidebar( 'our-partner-widget-area' ); ?>
+		    </div><!-- #our-partners .widget-area -->
+
+		    <div class="widget-area col-xs-12 col-sm-4" id="social-media">
+		        <?php dynamic_sidebar( 'social-media-widget-area' ); ?>
+		    </div><!-- #social-media .widget-area -->
+
 		</div>
 	</footer> 
 

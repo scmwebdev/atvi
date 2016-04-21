@@ -107,12 +107,8 @@ function atvi_theme_widgets_init() {
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
 	) );
-}
-add_action( 'widgets_init', 'atvi_theme_widgets_init' );
 
-function tutsplus_widgets_init() {
- 
-    //Footer
+	//More Info - Footer
     register_sidebar( array(
         'name' => __( 'More Info - Footer', 'Atvi' ),
         'id' => 'more-info-widget-area',
@@ -122,11 +118,36 @@ function tutsplus_widgets_init() {
         'before_title' => '<h2 class="widget-title">',
         'after_title' => '</h2>',
     ) );
-         
+
+    //Our Partner - Footer
+    register_sidebar( array(
+        'name' => __( 'Our Partner - Footer', 'Atvi' ),
+        'id' => 'our-partner-widget-area',
+        'class' => '',
+        'description' => __( 'Our Partner Widget Area', 'Atvi' ),
+        'before_widget' => '<div id="%1$s" class="widget-container %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h2 class="widget-title">',
+        'after_title' => '</h2>',
+    ) );
+
+    //Social Media - Footer
+    register_sidebar( array(
+        'name' => __( 'Social Media - Footer', 'Atvi' ),
+        'id' => 'social-media-widget-area',
+        'class' => '',
+        'description' => __( 'Social Media Widget Area', 'Atvi' ),
+        'before_widget' => '<div id="%1$s" class="widget-container %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h2 class="widget-title">',
+        'after_title' => '</h2>',
+    ) );
+
 }
- 
-// Register sidebars by running tutsplus_widgets_init() on the widgets_init hook.
-add_action( 'widgets_init', 'tutsplus_widgets_init' );
+add_action( 'widgets_init', 'atvi_theme_widgets_init' );
+
+// // Register sidebars by running tutsplus_widgets_init() on the widgets_init hook.
+// add_action( 'widgets_init', 'tutsplus_widgets_init' );
 
 
 /**
@@ -180,3 +201,4 @@ add_image_size( 'mainBanner_lg', 1920, 600, true);
 add_image_size( 'mainBanner_md', 992, 400, true);
 add_image_size( 'mainBanner_xs', 600, 600, true);
 add_image_size( 'video_thumb', 500, 250, hard);
+add_image_size( 'logo', 200, 200, hard);

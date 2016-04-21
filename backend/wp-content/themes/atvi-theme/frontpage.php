@@ -1,12 +1,12 @@
 <?php
 /**
  * Template for display the frontpage of the website
- * Template Name: Frontpage
+ * Template Name: Frontpage 
  * @package atvi
  */
 
 get_header(); ?>
-<div id="primary" class="content-area <?php echo get_the_title() ?>">
+<div id="primary" class="content-area <?php echo get_the_title() ?> frontpage">
 	<main id="main" class="site-main clearfix" role="main">
 		<div class="carousel" id="atvi-carousel">
 			<?php for($i = 1; $i <= 4; $i++) { 
