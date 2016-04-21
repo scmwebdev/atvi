@@ -41,6 +41,7 @@ function atvi_theme_setup() {
 	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 	 */
 	add_theme_support( 'post-thumbnails' );
+	add_theme_support('thumbnails');
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
@@ -202,3 +203,22 @@ add_image_size( 'mainBanner_md', 992, 400, true);
 add_image_size( 'mainBanner_xs', 600, 600, true);
 add_image_size( 'video_thumb', 500, 250, hard);
 add_image_size( 'logo', 200, 200, hard);
+
+/* ==================================================================
+ * Display child pages list
+ * ================================================================== */
+
+function wpb_list_child_pages() { 
+
+global $post; 
+if ( is_page() && $post->post_parent )
+  $childpages = wp_list_pages( 'sort_column=menu_order&title_li=&child_of=' . $post->post_parent . '&echo=0' );
+else
+  $childpages = wp_list_pages( 'sort_column=menu_order&title_li=&child_of=' . $post->ID . '&echo=0' );
+if ( $childpages ) {
+  $string = '<ul class="content-list list-parent __nodots __nopaddingleft __normarginleft">' . $childpages . '</ul>';
+}
+return $string;
+}
+
+add_shortcode('wpb_childpages', 'wpb_list_child_pages');
