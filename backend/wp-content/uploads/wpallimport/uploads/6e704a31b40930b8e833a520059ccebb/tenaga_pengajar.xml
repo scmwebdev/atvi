@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+	<node>
+		<name><![CDATA[John Smith]]></name>
+		<role><![CDATA[Professor]]></role>
+		<experience><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sed leo sodales, mollis risus vel, pulvinar justo. ]]></experience>
+	</node>
+	<node>
+		<name><![CDATA[Richard Dawkins]]></name>
+		<role><![CDATA[Head]]></role>
+		<experience><![CDATA[Vestibulum mollis urna in malesuada feugiat. Praesent lacinia varius lorem nec ultrices. ]]></experience>
+	</node>
+	<node>
+		<name><![CDATA[Laura Mcculaugh]]></name>
+		<role><![CDATA[Vice-head]]></role>
+		<experience><![CDATA[Nunc molestie at ante vel faucibus. Nullam tristique lobortis imperdiet. Aliquam consectetur massa quis ex rutrum, a commodo nisi viverra.]]></experience>
+	</node>
+</data>
