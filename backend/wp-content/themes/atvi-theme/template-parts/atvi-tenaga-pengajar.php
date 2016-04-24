@@ -37,7 +37,6 @@
 			</div>
 			<div class="item-list-desc col-xs-12 col-sm-8">
 				<div class="item-list-name"><?php the_title(); ?></div>
-				<!-- <div class="item-list-role"><?php echo $role; ?></div> -->
 				<div class="item-list-exp __spacepad"><?php the_content(); ?></div>
 			</div>
 		</div>
