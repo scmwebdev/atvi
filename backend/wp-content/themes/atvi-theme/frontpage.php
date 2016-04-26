@@ -58,6 +58,7 @@ get_header(); ?>
 				</div>
 				<?php } ?>
 				</div>
+			<hr>
 			</div>
 		</div>
 		<div class="penjurusan __spacepad">
@@ -93,6 +94,36 @@ get_header(); ?>
 						</div>
 					</div>
 
+				</div>
+			</div>
+		</div>
+		<div class="events __spacepad">
+			<div class="container">
+				<h2 class="title text-center">Warta Berita</h2>
+				<div class="__spacepad" id="atvi-events">
+					<div class="item">
+					<?php
+
+						$args = array(
+								"post_type" => "ai1ec_event"
+						);
+
+						// The Query
+						$event = new WP_Query( $args );
+
+						// The Loop
+						if ( $event->have_posts() ) {
+							while ( $event->have_posts() ) {
+								$event->the_post();
+								get_template_part( 'template-parts/atvi', 'events' );
+							}
+						} else {
+							// no posts found
+						}
+						/* Restore original Post Data */
+						wp_reset_postdata();
+					?>
+					</div>
 				</div>
 			</div>
 		</div>

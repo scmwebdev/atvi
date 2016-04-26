@@ -1,9 +1,3 @@
-# BEGIN iThemes Security - Do not modify or remove this line
-# iThemes Security Config Details: 2
-	# Enable the hide backend feature - Security > Settings > Hide Login Area > Hide Backend
-	RewriteRule ^(/atvi/backend/)?wplogin/?$ /atvi/backend/wp-login.php [QSA,L]
-# END iThemes Security - Do not modify or remove this line
-
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On

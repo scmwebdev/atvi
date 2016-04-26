@@ -13,3 +13,8 @@ backend/wp-content/themes/atvi-theme/sass/
 # ignore env.php 
 env.php
 
+#ignore dist
+dist/
+
+#ignore zip files
+*.zip
