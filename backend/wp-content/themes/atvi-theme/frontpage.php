@@ -166,12 +166,12 @@ get_header(); ?>
 						);
 
 						// The Query
-						$event = new WP_Query( $args );
+						$events_added = new WP_Query( $args );
 
 						// The Loop
-						if ( $event->have_posts() ) {
-							while ( $event->have_posts() ) {
-								$event->the_post(); 
+						if ( $events_added->have_posts() ) {
+							while ( $events_added->have_posts() ) {
+								$events_added->the_post();
 						?>
 
 							<div class="item-list col-xs-12 col-sm-4">
