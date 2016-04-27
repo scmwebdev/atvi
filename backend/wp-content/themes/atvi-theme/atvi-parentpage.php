@@ -27,7 +27,7 @@ get_header(); ?>
 					<hr>
 					<div class="child-menu col-xs-12 col-sm-3">
 						<div class="sub-menu">
-							<h3 class="trigger-menu title">Menu</h3>
+							<h4 class="trigger-menu title">Menu</h4>
 						</div>
 						<?php echo wpb_list_child_pages() ?>
 					</div>
