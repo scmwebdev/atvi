@@ -17,11 +17,6 @@
 	<div class="entry-content test">
 		<?php
 			the_content();
-
-			wp_link_pages( array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'atvi-theme' ),
-				'after'  => '</div>',
-			) );
 		?>
 	</div><!-- .entry-content -->
 
