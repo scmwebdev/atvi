@@ -60,9 +60,17 @@ define('LOGGED_IN_SALT',   'GQ*Ic}g0esXn~(^SBjO-+uV>R0nOkjyD-{|9*^?V.>!JYGgJ]+0+
 define('NONCE_SALT',       'Zr)~|gd{#?-.}-W4x)`Z&x*CA5:LU8qTTFL7@YY2u17&_0znR%:89&|/$R0UzJFH');
 
 /* ** set wordpress folder and site url dynamic ** */
+// define('WP_HOME', 'http://'. $env_config['home'] );
+// define('WP_SITEURL', 'http://'. $env_config['host'] );
+
 define('WP_HOME', 'http://'. $env_config['home'] );
 define('WP_SITEURL', 'http://'. $env_config['host'] );
+
+
 /* ** end ** */
+
+/* ** increase upload limit ** */
+define('WP_MEMORY_LIMIT', '128M');
 
 /**#@-*/
 
