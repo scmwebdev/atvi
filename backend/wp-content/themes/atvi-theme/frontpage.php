@@ -131,7 +131,7 @@ get_header(); ?>
 									?>
 								<div class="item-list col-xs-12 col-sm-4">
 									<div class="item-list-container">
-										<div class="item-list-thumbnail">
+										<div class="item-list-thumbnail __hovertype-2">
 											<a href="<?php the_permalink(); ?>">
 												<?php the_post_thumbnail('video_thumb', array('class' => 'img-responsive')); ?>
 											</a>
@@ -176,7 +176,7 @@ get_header(); ?>
 
 							<div class="item-list col-xs-12 col-sm-4">
 								<div class="item-list-container">
-									<div class="item-list-thumbnail">
+									<div class="item-list-thumbnail __hovertype-2">
 										<a href="<?php the_permalink(); ?>">
 											<?php the_post_thumbnail('video_thumb', array('class' => 'img-responsive')); ?>
 										</a>

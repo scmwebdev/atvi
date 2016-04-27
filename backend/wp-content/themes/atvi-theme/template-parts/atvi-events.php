@@ -14,6 +14,4 @@
 			<?php echo substr(get_the_excerpt(), 0, 400) . ' ...'?>
 		</div>
 	</div>
-
-
 </div>
