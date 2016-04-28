@@ -6,7 +6,7 @@
 	$url = site_url();
 
 ?>
-<div class="user-content col-xs-12 col-sm-9">
+<!-- <div class="user-content col-xs-12 col-sm-9"> -->
 	<div class="item">
 
 	<?php
@@ -44,6 +44,7 @@
 		endwhile;
 			if (function_exists(custom_pagination)) {
 				custom_pagination($the_query->max_num_pages,"",$paged);
+				
 			} else {
 				echo 'function does not exist!';
 			}
@@ -61,4 +62,4 @@
 	?>
 
 	</div>
-</div>
+<!-- </div> -->

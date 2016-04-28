@@ -29,8 +29,8 @@ get_header(); ?>
 					<?php if ( function_exists('yoast_breadcrumb') ) 
 						{yoast_breadcrumb('<div class="small" id="breadcrumbs"><p class="breadcrumbs-content">','</p></div>');} 
 					?>
-					<h1 class="title"><?php echo get_the_title() ?></h1>
-					<hr>
+					<!-- <h1 class="title"><?php echo get_the_title() ?></h1>
+					<hr> -->
 					<div class="child-menu col-xs-12 col-sm-3">
 						<div class="sub-menu">
 							<h4 class="trigger-menu title">Menu</h4>
@@ -38,14 +38,22 @@ get_header(); ?>
 						<?php echo wpb_list_child_pages() ?>
 					</div>
 					<?php
-						$page = get_post(185); //tenaga pengajar
-						$slug = $page->post_name; // get the page/post slug
+						/* ** OLD TEMPLATE ** */
+						// $page_pengajar = get_post(185); //tenaga pengajar
+						// $page_berita = get_post(237); //berita
+						// $page_event = get_post(227); //event
 
-						if(is_page(185)) {
-							get_template_part('template-parts/atvi', $slug);
-						} else {
-							get_template_part('template-parts/atvi', 'pagecontent');
-						}
+						// $slug_pengajar = $page_pengajar->post_name; // get the page/post slug
+						// if(is_page(185)) {
+						// 	get_template_part('template-parts/atvi', $slug);
+						// } elseif(is_page(237) || is_page(227)) {
+						// 	get_template_part('template-parts/atvi', 'berita');
+						// } else {
+						// 	get_template_part('template-parts/atvi', 'pagecontent');
+						// }
+						/* ** /OLD TEMPLATE ** */
+						
+						get_template_part('template-parts/atvi', 'pagecontent');
 					?>
 				</div>
 				<?php } else { ?>

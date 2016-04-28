@@ -23,8 +23,8 @@ get_header(); ?>
 					<?php if ( function_exists('yoast_breadcrumb') ) 
 						{yoast_breadcrumb('<div class="small" id="breadcrumbs"><p class="breadcrumbs-content">','</p></div>');} 
 					?>
-					<h1 class="title"><?php echo get_the_title() ?></h1>
-					<hr>
+					<!-- <h1 class="title"><?php echo get_the_title() ?></h1>
+					<hr> -->
 					<div class="child-menu col-xs-12 col-sm-3">
 						<div class="sub-menu">
 							<h4 class="trigger-menu title">Menu</h4>
