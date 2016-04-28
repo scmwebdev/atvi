@@ -5,7 +5,7 @@ backend/wp-content/themes/atvi-theme/node_modules/
 backend/wp-content/themes/atvi-theme/js/
 
 # ignore source folder
-src/
+src_raw/
 
 # ignore sass folders
 backend/wp-content/themes/atvi-theme/sass/
@@ -13,8 +13,8 @@ backend/wp-content/themes/atvi-theme/sass/
 # ignore env.php 
 env.php
 
-#ignore dist
-dist/
+#ignore some legacy browsers
+404_orinal/
 
 #ignore zip files
 *.zip
