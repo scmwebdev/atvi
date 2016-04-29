@@ -148,11 +148,14 @@ get_header(); ?>
 								</div>
 							<?php	}
 							} else {
-								// no posts found
+								echo 'Maaf, tidak ada post!';
 							}
 							/* Restore original Post Data */
 							wp_reset_postdata();
 						?>
+							<div class="atvi-btn __view-btn __view-btn-all">
+								<a href="<?php echo home_url() . '/warta-berita/berita/'?>" class="btn btn-primary" role="button">Lihat lebih lanjut</a>
+							</div>
 						</div>
 					</div>
 				<div class="post-latest __spacepad clearfix" id="atvi-events">
@@ -198,7 +201,11 @@ get_header(); ?>
 						}
 						/* Restore original Post Data */
 						wp_reset_postdata();
+
 					?>
+					<div class="atvi-btn __view-btn __view-btn-all">
+						<a href="<?php echo home_url() . '/warta-berita/event/'?>" class="btn btn-primary" role="button">Lihat lebih lanjut</a>
+					</div>
 					</div>
 				</div>
 					
@@ -234,9 +241,9 @@ get_header(); ?>
 						wp_reset_postdata();
 					?>
 				</div>
-				<div class="readmore col-xs-12">
-					<button type="button" class="btn btn-primary">Click here for more</button>
-				</div>
+				<div class="atvi-btn __view-btn __view-btn-all">
+						<a href="<?php echo home_url() . '/warta-berita/video/'?>" class="btn btn-primary" role="button">Lihat lebih lanjut</a>
+					</div>
 			</div>
 		</div>
 		<div class="message __spacepad">

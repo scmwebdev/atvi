@@ -17,7 +17,7 @@
 			<div class="main-navigation-closebtn menu-trigger">
 				<i class="fa fa-times fa-3x" aria-hidden="true"></i>
 			</div>
-			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
+			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu' => 'Megamenu_Mobile' ) ); ?>
 
 	</nav>
 </div>
