@@ -38,7 +38,7 @@
 					}
 					wp_reset_postdata();
 
-				} elseif($slug == 'calendar') {
+				} elseif($slug == 'event') {
 					
 					//grab post with berita category
 					$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;

@@ -11,7 +11,6 @@ get_header(); ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
-
 		<?php
 		while ( have_posts() ) : the_post();
 
@@ -19,16 +18,12 @@ get_header(); ?>
 			if ($type == 'ai1ec_event') {
 				get_template_part( 'template-parts/atvi', 'event' );
 			} else {
-
 				get_template_part( 'template-parts/content', get_post_format() );
 			}
 			
 			//the_post_navigation();
 
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
+			// echo next_post_link('%link', 'Next');
 
 		endwhile; // End of the loop.
 		?>
