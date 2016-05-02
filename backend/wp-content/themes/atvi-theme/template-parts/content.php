@@ -23,6 +23,7 @@
 		<div class="container">
 			
 		<header class="entry-header">
+			<div class="container">
 			<?php
 				
 				if ( is_single() ) {
@@ -37,9 +38,13 @@
 			</div><!-- .entry-meta -->
 			<?php
 			endif; ?>
+			</div>
 		</header><!-- .entry-header -->
 
 		<div class="entry-content">
+			<div class="container">
+				
+			
 			<?php
 				the_content( sprintf(
 					/* translators: %s: Name of current post. */
@@ -48,6 +53,7 @@
 				) );
 
 			?>
+			</div>
 		</div><!-- .entry-content -->
 
 		<footer class="entry-footer">
