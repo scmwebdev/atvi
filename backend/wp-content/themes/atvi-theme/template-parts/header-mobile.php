@@ -1,4 +1,4 @@
-<div class="header-mobile">
+<div class="header-mobile clearfix">
 	<div class="site-branding __left __spacepad">
 		<?php
 		if ( is_front_page() && is_home() ) : ?>

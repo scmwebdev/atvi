@@ -19,6 +19,7 @@ get_header(); ?>
 			if ($type == 'ai1ec_event') {
 				get_template_part( 'template-parts/atvi', 'event' );
 			} else {
+
 				get_template_part( 'template-parts/content', get_post_format() );
 			}
 			
