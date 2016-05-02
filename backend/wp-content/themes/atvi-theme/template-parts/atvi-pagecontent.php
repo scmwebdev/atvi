@@ -5,9 +5,8 @@
 			<hr>
 
 			<?php 
-
-				$id = get_the_ID();
-				if($id == '237') {
+				$slug = $post->post_name;
+				if($slug == 'berita') {
 
 					//grab post with berita category
 					$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
@@ -39,7 +38,7 @@
 					}
 					wp_reset_postdata();
 
-				} elseif($id == '227') {
+				} elseif($slug == 'calendar') {
 					
 					//grab post with berita category
 					$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
@@ -69,9 +68,9 @@
 					}
 					wp_reset_postdata();
 
-				} elseif($id == '185') {
+				} elseif($slug == 'tenaga-pengajar') {
 					get_template_part('template-parts/atvi', 'tenaga-pengajar');
-				} elseif($id == '253') {
+				} elseif($slug == 'video') {
 
 					//grab post with berita category
 					$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
@@ -113,9 +112,8 @@
 		<h1 class="title"><?php echo get_the_title() ?></h1>
 		<hr />
 		<?php 
-
-				$id = get_the_ID();
-				if($id == '237') {
+				$slug = $post->post_name;
+				if($slug == 'berita') {
 
 					//grab post with berita category
 					$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
@@ -147,7 +145,7 @@
 					}
 					wp_reset_postdata();
 
-				} elseif($id == '227') {
+				} elseif($slug == 'calendar') {
 					
 					//grab post with berita category
 					$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
@@ -177,9 +175,9 @@
 					}
 					wp_reset_postdata();
 
-				} elseif($id == '185') {
+				} elseif($slug == 'tenaga-pengajar') {
 					get_template_part('template-parts/atvi', 'tenaga-pengajar');
-				} elseif($id == '253') {
+				} elseif($slug == 'video') {
 
 					//grab post with berita category
 					$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
