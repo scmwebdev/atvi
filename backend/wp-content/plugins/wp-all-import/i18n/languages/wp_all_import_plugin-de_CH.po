@@ -1184,7 +1184,7 @@ msgstr ""
 
 #: ../../controllers/admin/import.php:295
 msgid ""
-"The import template you are using requires User Import Add-On.<br/><a href=\"http://"
+"The import template you are using requires the User Import Add-On.<br/><a href=\"http://"
 "www.wpallimport.com/add-ons/user-import/?utm_source=wordpress.org&utm_medium=wpai-"
 "import-template&utm_campaign=free+wp+all+export+plugin\" target=\"_blank\">Purchase "
 "the User Import Add-On</a>"

@@ -80,7 +80,7 @@ if ( ! function_exists('wp_all_import_template_notifications') )
 			{
 				$notification[] = __('The import template you are using requires an Add-On for WP All Import. If you continue without using this Add-On your data may import incorrectly.', 'wp_all_import_plugin');
 			}
-		}	
+		}			
 
 		if ( ! empty($notifications))
 		{

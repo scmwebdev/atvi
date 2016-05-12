@@ -46,7 +46,7 @@
 									<label for="<?php echo $section_slug; ?>featured_delim"><?php _e('Enter image filenames one per line, or separate them with a ', 'wp_all_import_plugin');?></label>
 									<input type="text" class="small" id="<?php echo $section_slug; ?>featured_delim" name="<?php echo $section_slug; ?>featured_delim" value="<?php echo esc_attr($post[$section_slug . 'featured_delim']) ?>" style="width:5%; text-align:center;"/>
 									<textarea name="<?php echo $section_slug; ?>featured_image" class="newline rad4" style="clear: both; display:block; "><?php echo esc_attr($post[$section_slug . 'featured_image']) ?></textarea>			
-								</div>									
+								</div>																
 							</div>
 							<h4><?php _e('Image Options', 'wp_all_import_plugin'); ?></h4>
 							<div class="search_through_the_media_library">
@@ -57,9 +57,9 @@
 									<a href="#help" class="wpallimport-help" title="<?php _e('If an image with the same file name is found in the Media Library then that image will be attached to this record instead of importing a new image. Disable this setting if your import has different images with the same file name.', 'wp_all_import_plugin') ?>" style="position: relative; top: -2px;">?</a>
 								</div>							
 								<div class="input" style="margin: 3px;">
-									<input type="hidden" name="do_not_remove_images" value="0" />
-									<input type="checkbox" id="do_not_remove_images" name="do_not_remove_images" value="1" <?php echo $post['do_not_remove_images'] ? 'checked="checked"': '' ?> />
-									<label for="do_not_remove_images"><?php _e('Keep images currently in Media Library', 'wp_all_import_plugin') ?></label>
+									<input type="hidden" name="<?php echo $section_slug; ?>do_not_remove_images" value="0" />
+									<input type="checkbox" id="<?php echo $section_slug; ?>do_not_remove_images" name="<?php echo $section_slug; ?>do_not_remove_images" value="1" <?php echo $post[$section_slug . 'do_not_remove_images'] ? 'checked="checked"': '' ?> />
+									<label for="<?php echo $section_slug; ?>do_not_remove_images"><?php _e('Keep images currently in Media Library', 'wp_all_import_plugin') ?></label>
 									<a href="#help" class="wpallimport-help" title="<?php _e('If disabled, images attached to imported posts will be deleted and then all images will be imported.', 'wp_all_import_plugin') ?>" style="position:relative; top: -2px;">?</a>
 								</div>
 							</div>
@@ -78,7 +78,7 @@
 								<input type="checkbox" id="<?php echo $section_slug; ?>create_draft" name="<?php echo $section_slug; ?>create_draft" value="yes" <?php echo 'yes' == $post[$section_slug . 'create_draft'] ? 'checked="checked"' : '' ?> class="fix_checkbox"/>
 								<label for="<?php echo $section_slug; ?>create_draft"><?php _e('If no images are downloaded successfully, create entry as Draft.', 'wp_all_import_plugin') ?></label>
 							</div>
-							<?php endif; ?>		
+							<?php endif; ?>																						
 						</td>
 					</tr>
 				</table>
@@ -135,13 +135,13 @@
 											<label for="<?php echo $section_slug; ?>set_image_meta_description"><?php _e('Set Description(s)','wp_all_import_plugin');?></label>
 											<div class="switcher-target-<?php echo $section_slug; ?>set_image_meta_description" style="padding-left:23px;">	
 												<div class="input">
-													<input id="image_meta_description_delim_logic_separate" type="radio" name="image_meta_description_delim_logic" value="separate" <?php echo ($post[$section_slug . 'image_meta_description_delim_logic'] == 'separate' and ! empty($post[$section_slug . 'image_meta_description_delim'])) ? 'checked="checked"' : ''; ?>/>
-													<label for="image_meta_description_delim_logic_separate"><?php _e('Separate them with a', 'wp_all_import_plugin'); ?></label>
+													<input id="<?php echo $section_slug; ?>image_meta_description_delim_logic_separate" type="radio" name="<?php echo $section_slug; ?>image_meta_description_delim_logic" value="separate" <?php echo ($post[$section_slug . 'image_meta_description_delim_logic'] == 'separate' and ! empty($post[$section_slug . 'image_meta_description_delim'])) ? 'checked="checked"' : ''; ?>/>
+													<label for="<?php echo $section_slug; ?>image_meta_description_delim_logic_separate"><?php _e('Separate them with a', 'wp_all_import_plugin'); ?></label>
 													<input type="text" class="small" id="<?php echo $section_slug; ?>image_meta_description_delim" name="<?php echo $section_slug; ?>image_meta_description_delim" value="<?php echo esc_attr($post[$section_slug . 'image_meta_description_delim']) ?>" style="width:5%; text-align:center;"/>													
 												</div>
 												<div class="input">
-													<input id="image_meta_description_delim_logic_line" type="radio" name="image_meta_description_delim_logic" value="line" <?php echo ($post[$section_slug . 'image_meta_description_delim_logic'] == 'line' or empty($post[$section_slug . 'image_meta_description_delim'])) ? 'checked="checked"' : ''; ?>/>
-													<label for="image_meta_description_delim_logic_line"><?php _e('Enter them one per line', 'wp_all_import_plugin'); ?></label>
+													<input id="<?php echo $section_slug; ?>image_meta_description_delim_logic_line" type="radio" name="<?php echo $section_slug; ?>image_meta_description_delim_logic" value="line" <?php echo ($post[$section_slug . 'image_meta_description_delim_logic'] == 'line' or empty($post[$section_slug . 'image_meta_description_delim'])) ? 'checked="checked"' : ''; ?>/>
+													<label for="<?php echo $section_slug; ?>image_meta_description_delim_logic_line"><?php _e('Enter them one per line', 'wp_all_import_plugin'); ?></label>
 												</div>												
 												<p style="margin-bottom:5px;"><?php _e('The first description will be linked to the first image, the second description will be linked to the second image, ...', 'wp_all_import_plugin');?></p>
 												<textarea name="<?php echo $section_slug; ?>image_meta_description" class="newline rad4"><?php echo esc_attr($post[$section_slug . 'image_meta_description']) ?></textarea>																				

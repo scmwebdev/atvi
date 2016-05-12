@@ -44,6 +44,8 @@ $.fn.wplupload  = function($options) {
 			$('#cancel-upload').removeAttr('disabled');
 
 			//$('.auto-generate-template').removeAttr('rel').hide();
+
+			$('.wpallimport-upload-type-container[rel=upload_type]').find('.wpallimport-note').hide();
 			
 			$up.start();
 		});
@@ -121,12 +123,12 @@ $.fn.wplupload  = function($options) {
 							else
 							{
 								$('.auto-generate-template').css({'display':'inline-block'}).attr('rel', 'upload_type');
-							}							
+							}																
 						}
 						else
 						{
 							$('.auto-generate-template').hide();
-						}
+						}												
 					}
 					else
 					{
@@ -137,11 +139,21 @@ $.fn.wplupload  = function($options) {
 
 					$('#progressbar').html('<span>Upload Complete</span> - ' + file.name + ' (' + ( (file.size / (1024*1024) >= 1) ? (file.size / (1024*1024)).toFixed(2) + 'mb' : (file.size / (1024)).toFixed(2) + 'kb') + ')');					
 
-					setTimeout(function() {					
-						
-						$('.wpallimport-choose-file').find('.wpallimport-upload-resource-step-two').slideDown();	
+					setTimeout(function() {																	
 
-						$('.wpallimport-choose-file').find('.wpallimport-submit-buttons').show();		
+						if (r.post_type && r.notice !== false)
+						{
+							var $note = $('.wpallimport-upload-type-container[rel=upload_type]').find('.wpallimport-note');
+							$note.html("<div class='wpallimport-free-edition-notice'>" + r.notice + "</div>").show();						
+							$('.wpallimport-choose-file').find('.wpallimport-submit-buttons').hide();
+							$('.wpallimport-choose-file').find('.wpallimport-upload-resource-step-two').slideUp();
+							$('input[name=filepath]').val('');
+						}
+						else
+						{
+							$('.wpallimport-choose-file').find('.wpallimport-upload-resource-step-two').slideDown();
+							$('.wpallimport-choose-file').find('.wpallimport-submit-buttons').show();		
+						}						
 
 						if (r.OK) {					
 

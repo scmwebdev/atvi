@@ -596,6 +596,10 @@
 	margin-top: 5px;
 	font-size:20px;
 }
+.wpallimport-plugin p.wpallimport-bundle-notice{
+	margin-top: 0;
+	margin-bottom: 15px;
+}
 /*--------------------------------------------------------------------------
 *
 *	Helpers
@@ -1389,6 +1393,13 @@
 	content: "\f174";
 	color: #555;
 	margin-top: 0;
+}
+.wpallimport-plugin #custom_type_selector .dd-option .dashicon-shop_order:before,
+.wpallimport-plugin #custom_type_selector .dd-selected .dashicon-shop_order:before{
+	font-family: "WooCommerce";
+	content: "\e03d";
+	color: #555;
+	margin-top: 2px;
 }
 .wpallimport-plugin #custom_type_selector .dd-option .dashicon-cpt:before,
 .wpallimport-plugin #custom_type_selector .dd-selected .dashicon-cpt:before{

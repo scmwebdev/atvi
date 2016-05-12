@@ -100,6 +100,7 @@ $l10n = array(
 					                </div>
 					            </div>
 					        </div>
+					        <div class="wpallimport-note" style="margin: 0 auto; font-size: 13px;"></div>					        
 						</div>
 						<div class="wpallimport-upload-type-container" rel="url_type">						
 							<div class="wpallimport-file-type-options">
@@ -169,7 +170,7 @@ $l10n = array(
 									
 									$custom_types = get_post_types(array('_builtin' => true), 'objects') + get_post_types(array('_builtin' => false, 'show_ui' => true), 'objects'); 
 									foreach ($custom_types as $key => $ct) {
-										if (in_array($key, array('attachment', 'revision', 'nav_menu_item'))) unset($custom_types[$key]);
+										if (in_array($key, array('attachment', 'revision', 'nav_menu_item', 'shop_coupon'))) unset($custom_types[$key]);
 									}
 									$custom_types = apply_filters( 'pmxi_custom_types', $custom_types );
 
@@ -193,13 +194,31 @@ $l10n = array(
 									</div>
 									<select name="custom_type_selector" id="custom_type_selector" class="wpallimport-post-types">								
 										<?php if ( ! empty($custom_types)): ?>							
-											<?php foreach ($custom_types as $key => $cpt) :?>	
+											<?php foreach ($custom_types as $key => $ct) :?>	
 												<?php 
 													$image_src = 'dashicon-cpt';
-													if (  in_array($key, array('post', 'page', 'product', 'import_users') ) )
-														$image_src = 'dashicon-' . $key;										
+
+													$cpt = $key;
+													$cpt_label = $ct->labels->name;
+
+													if (class_exists('WooCommerce'))
+													{
+														if ($key == 'product')
+														{
+															$cpt = 'shop_order';
+															$cpt_label = $custom_types['shop_order']->labels->name;
+														}
+														elseif($key == 'shop_order')
+														{
+															$cpt = 'product';
+															$cpt_label = $custom_types['product']->labels->name;
+														}
+													}
+												
+													if (  in_array($cpt, array('post', 'page', 'product', 'import_users', 'shop_order') ) )
+														$image_src = 'dashicon-' . $cpt;										
 												?>
-											<option value="<?php echo $key; ?>" data-imagesrc="dashicon <?php echo $image_src; ?>"><?php echo $cpt->labels->name; ?></option>
+											<option value="<?php echo $cpt; ?>" data-imagesrc="dashicon <?php echo $image_src; ?>"><?php echo $cpt_label; ?></option>
 											<?php endforeach; ?>
 										<?php endif; ?>
 										<?php if ( ! empty($hidden_post_types)): ?>							

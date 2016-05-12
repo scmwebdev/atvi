@@ -671,8 +671,8 @@
 
 		// Clear all detected custom fields
 		$form.find('.clear_detected_cf').click(function(){			
-			if ($detected_cf.length){
-				var parent = $(this).parents('.wpallimport-collapsed-content:first');
+			var parent = $(this).parents('.wpallimport-collapsed-content:first');
+			if ($detected_cf.length){				
 				for (var i = 0; i < $detected_cf.length; i++){
 					parent.find('input[name^=custom_name]:visible').each(function(){
 						if ($detected_cf[i].key == $(this).val()) $(this).parents('tr').first().remove();
@@ -1723,9 +1723,15 @@
 	        matchBrackets: true,
 	        mode: "application/x-httpd-php",
 	        indentUnit: 4,
-	        indentWithTabs: true
+	        indentWithTabs: true,
+	        lineWrapping: true
 	    });
-	    editor.setCursor(1);
+	    editor.setCursor(1);	 
+	    $('.CodeMirror').resizable({
+		  resize: function() {
+		    editor.setSize("100%", $(this).height());
+		  }
+		}); 
 	}    
 
 	$('.wp_all_import_ajax_deletion').click(function(e){

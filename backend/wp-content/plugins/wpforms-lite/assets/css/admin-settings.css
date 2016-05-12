@@ -1,0 +1,192 @@
+/* ==========================================================================
+   Settings Styles
+   ========================================================================== */
+
+#wpforms-settings .wpforms-clear:before {
+	content: " ";
+	display: table;
+}
+
+#wpforms-settings .wpforms-clear:after {
+	clear: both;
+	content: " ";
+	display: table;	
+}
+
+#wpforms-settings .wpforms-tab {
+	display: none;
+}
+
+#wpforms-settings .wpforms-tab .below-h2 {
+	margin-top: 22px;
+}
+
+#wpforms-settings .wpforms-tab.wpforms-active {
+	display: block;
+}
+
+#wpforms-settings div.updated {
+	margin-top: 15px;
+}
+
+#wpforms-settings td.section {
+	padding: 0 0 10px 0;
+	margin: 0;
+}
+
+#wpforms-settings td.section h4 {
+	margin: 15px 0 0 0;
+	font-size: 20px;
+}
+
+#wpforms-settings td.section {
+	
+}
+
+#wpforms-settings td label {
+	margin: .25em 0 .5em!important;
+	display: inline-block;
+	font-style: italic;
+}
+
+#wpforms-settings h4 {
+	margin: 0;
+}
+
+#wpforms-settings input[type=text],
+#wpforms-settings input[type=password] {
+	min-width: 300px;
+}
+
+#wpforms-settings #submit-key-refresh {
+	vertical-align: baseline;
+}
+
+#wpforms-settings .wpforms-provider-account {
+	margin-bottom: 20px;
+	line-height: 1.8;
+}
+
+#wpforms-settings .wpforms-provider-account span {
+	display: inline-block;
+	min-width: 120px;
+	color: #666;
+}
+
+#wpforms-settings .wpforms-settings-upload-image-display {
+	display: block;
+	margin: 0 !important;
+}
+
+#wpforms-settings .wpforms-settings-upload-image-display img {
+	display: block;
+	margin: 0 0 10px 0 !important;
+	max-width: 410px;
+}
+
+/* Integrations tab
+-------------------------------------------------------------- */
+
+.wpforms-settings-provider {
+	border-bottom: 1px solid #ddd;
+	max-width: 800px;
+	padding: 20px 0;
+}
+
+.wpforms-settings-provider-header {
+	cursor: pointer;
+}
+
+.wpforms-settings-provider-logo {
+	float: left;
+	position: relative;
+}
+
+.wpforms-settings-provider-logo .fa {
+	position: absolute;
+	top: 50%;
+	margin: -9px 0 0 0;
+	left: 10px;
+	color: #666;
+	font-size: 18px;
+}
+
+.wpforms-settings-provider-logo img {
+	border: 1px solid #ddd;
+	max-width: 90px;
+	display: block;
+	margin: 0 0 0 40px;
+}
+
+.wpforms-settings-provider-info {
+	margin: 0 0 0 160px;
+	position: relative;
+	padding: 20px 0 0;
+}
+
+.wpforms-settings-provider-info h3 {
+	margin: 0 0 10px 0;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.wpforms-settings-provider-info p {
+	margin: 0;
+}
+
+.wpforms-settings-provider-info .connected-indicator {
+	color: #83c11f;
+	width: 105px;
+	border: 1px solid #83c11f;
+	border-radius: 4px;
+	padding: 8px 14px;
+	font-size: 16px;
+	position: absolute;
+	top: 28px;
+	right: 0;
+	display: none;
+}
+
+.connected .wpforms-settings-provider-info .connected-indicator {
+	display: block;
+}
+
+.wpforms-settings-provider-accounts {
+	margin: 0 0 0 160px;
+	display: none;
+}
+
+.wpforms-settings-provider-accounts-list ul {
+	padding: 0;
+	margin: 0;
+}
+
+.wpforms-settings-provider-accounts-list ul li {
+	border-bottom: 1px solid #ddd;
+	margin: 0;
+	padding: 4px 0;
+}
+
+.wpforms-settings-provider-accounts-list span.label {
+	display: inline-block;
+	width: 220px;
+}
+
+.wpforms-settings-provider-accounts-list span.date {
+	color: #999;
+	display: inline-block;
+	width: 220px;
+}
+
+.wpforms-settings-provider-accounts-connect {
+	display: none;
+	padding-top: 10px;
+}
+
+.wpforms-settings-provider-accounts-connect .fa {
+	display: none;
+}
+
+.wpforms-settings-provider-accounts-connect p {
+	margin: 0 0 15px 0;
+}

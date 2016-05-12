@@ -245,7 +245,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 						$this->errors->add('form-validation', __('Certain columns are required to be present in your file to enable it to be re-imported with WP All Import. These columns are missing. Re-export your file using WP All Export, and don\'t delete any of the columns when editing it. Then, re-import will work correctly.', 'wp_all_import_plugin'));
 					}
 					elseif($importRecord->options['custom_type'] == 'import_users' && ! class_exists('PMUI_Plugin')){
-						$this->errors->add('form-validation', __('The import template you are using requires User Import Add-On.<br/><a href="http://www.wpallimport.com/add-ons/user-import/?utm_source=wordpress.org&utm_medium=wpai-import-template&utm_campaign=free+wp+all+export+plugin" target="_blank">Purchase the User Import Add-On</a>', 'wp_all_import_plugin'));
+						$this->errors->add('form-validation', __('The import template you are using requires the User Import Add-On.<br/><a href="http://www.wpallimport.com/add-ons/user-import/?utm_source=wordpress.org&utm_medium=wpai-import-template&utm_campaign=free+wp+all+export+plugin" target="_blank">Purchase the User Import Add-On</a>', 'wp_all_import_plugin'));
 					}
 					
 					break;
@@ -2358,6 +2358,9 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 
 		wp_cache_flush();
 
+		wp_defer_term_counting(true);
+		wp_defer_comment_counting(true);
+
 		if ( PMXI_Plugin::is_ajax() or ! $ajax_processing ) {	
 			
 			$functions  = $wp_uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php';
@@ -2573,8 +2576,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 		}		
 		
 		if ( ( PMXI_Plugin::is_ajax() and empty(PMXI_Plugin::$session->local_paths) ) or ! $ajax_processing or ! empty($import->canceled) ) {
-			
-			$import->delete_source( $logger );
+						
 			$import->set(array(
 				'processing' => 0, // unlock cron requests	
 				'triggered' => 0,
@@ -2604,7 +2606,10 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 			$import->set(array(
 				'registered_on' => date('Y-m-d H:i:s'),
 				'executing' => 0
-			))->update();					
+			))->update();	
+
+			wp_defer_term_counting(false);
+			wp_defer_comment_counting(false);						
 
 			// add history log			
 			$custom_type = get_post_type_object( $import->options['custom_type'] );			
@@ -2623,6 +2628,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 
 			do_action( 'pmxi_after_xml_import', $import->id );
 
+			$import->delete_source( $logger );
 			$import->options['is_import_specified'] and $logger and call_user_func($logger, 'Done');	
 
 echo <<<COMPLETE

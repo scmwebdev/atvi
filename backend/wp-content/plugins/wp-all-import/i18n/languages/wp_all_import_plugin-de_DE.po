@@ -142,7 +142,7 @@ msgstr[1] ""
 
 #: ../../controllers/admin/settings.php:652
 #, php-format
-msgid "Please verify that the file you uploading is a valid %s file."
+msgid "This %s file has errors and is not valid."
 msgstr ""
 
 #: ../../helpers/wp_all_import_addon_notifications.php:124
@@ -1179,7 +1179,7 @@ msgstr ""
 
 #: ../../controllers/admin/import.php:295
 msgid ""
-"The import template you are using requires User Import Add-On.<br/><a "
+"The import template you are using requires the User Import Add-On.<br/><a "
 "href=\"http://www.wpallimport.com/add-ons/user-import/?utm_source=wordpress."
 "org&utm_medium=wpai-import-template&utm_campaign=free+wp+all+export+plugin\" "
 "target=\"_blank\">Purchase the User Import Add-On</a>"

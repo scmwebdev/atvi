@@ -1,0 +1,14 @@
+/* ==========================================================================
+   Admin Form Builder - Settings panel
+   ========================================================================== */
+
+#wpforms-panel-settings {
+}
+
+#wpforms-panel-settings .wpforms-panel-sidebar {
+/**/
+}
+
+#wpforms-panel-field-settings-pagebreak_prev-wrap {
+	display: none;
+}

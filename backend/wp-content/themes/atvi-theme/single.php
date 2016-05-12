@@ -17,13 +17,11 @@ get_header(); ?>
 			$type = get_post_type();
 			if ($type == 'ai1ec_event') {
 				get_template_part( 'template-parts/atvi', 'event' );
+				
 			} else {
 				get_template_part( 'template-parts/content', get_post_format() );
-			}
-			
-			//the_post_navigation();
 
-			// echo next_post_link('%link', 'Next');
+			}
 
 		endwhile; // End of the loop.
 		?>

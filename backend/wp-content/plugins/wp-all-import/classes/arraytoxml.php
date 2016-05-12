@@ -39,6 +39,7 @@ class PMXI_ArrayToXML
 	            }
 	            
 	            // replace anything not alpha numeric
+	            // preg_replace('/^[0-9]+/i', '', preg_replace('/[^a-z0-9_]/i', '', $key))
 	            $key = preg_replace('/[^a-z0-9_]/i', '', $key);
 	             
 	            // if there is another array found recrusively call this function
@@ -51,7 +52,7 @@ class PMXI_ArrayToXML
 	            else
 	            {                
 	                // add single node.
-	                $value =  htmlspecialchars($value);
+	                $value =  htmlspecialchars(preg_replace('/[^\x{0009}\x{000a}\x{000d}\x{0020}-\x{D7FF}\x{E000}-\x{FFFD}]+/u', ' ', $value));
 	                $xml->addChild($key, $value);
 
 	            }
