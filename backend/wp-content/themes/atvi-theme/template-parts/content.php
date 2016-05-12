@@ -65,16 +65,14 @@
 		<footer class="entry-footer">
 			<?php 
 
-				$previous_post_url = get_permalink(get_adjacent_post(false, '', true));
-				$next_post_url = get_permalink(get_adjacent_post(false, '', false));
+				// $previous_post_url = get_permalink(get_adjacent_post(false, '', true));
+				// $next_post_url = get_permalink(get_adjacent_post(false, '', false));
 
 				//atvi_theme_entry_footer(); 
 				// next_posts_link('%link', 'Next post in category', TRUE);
 				// echo get_next_posts_link('Next'); 
 			?>	
-			<?php if ( $next_post_url != get_the_permalink() ) : ?>
-		    <a href="<?php echo $next_post_url; ?>">Next Project</a>
-		<?php endif; ?>
+
 		</footer><!-- .entry-footer -->
 		</div>
 	</div>
