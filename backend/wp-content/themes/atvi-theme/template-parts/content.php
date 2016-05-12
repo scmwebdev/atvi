@@ -15,7 +15,7 @@
 			if(wpmd_is_phone()) {
 				the_post_thumbnail('mainBanner_xs' );		
 			} else {
-				the_post_thumbnail('mainBanner_lg' );	
+				the_post_thumbnail('mainBanner_lg', array( 'class' => 'img-responsive __fullwidth') );		
 			}
 		?>
 	</div>
@@ -63,7 +63,18 @@
 		</div><!-- .entry-content -->
 
 		<footer class="entry-footer">
-			<?php //atvi_theme_entry_footer(); ?>
+			<?php 
+
+				$previous_post_url = get_permalink(get_adjacent_post(false, '', true));
+				$next_post_url = get_permalink(get_adjacent_post(false, '', false));
+
+				//atvi_theme_entry_footer(); 
+				// next_posts_link('%link', 'Next post in category', TRUE);
+				// echo get_next_posts_link('Next'); 
+			?>	
+			<?php if ( $next_post_url != get_the_permalink() ) : ?>
+		    <a href="<?php echo $next_post_url; ?>">Next Project</a>
+		<?php endif; ?>
 		</footer><!-- .entry-footer -->
 		</div>
 	</div>

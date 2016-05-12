@@ -11,14 +11,19 @@ get_header(); ?>
 		<div class="carousel" id="atvi-carousel">
 			<?php for($i = 1; $i <= 4; $i++) { 
 				$slider =  ${'slider_'.$i} = get_field("slider_" . $i);
+				$slider_url =  ${'slider_'.$i.'_url'} = get_field("slider_" . $i.'_url');
 				if($slider) {
 			?>
 			<div class="carousel-slider-<?php echo $i; ?>">
 				<?php
 					if(wpmd_is_phone()) {
-						echo wp_get_attachment_image( $slider, 'mainBanner_xs' );		
+						echo '<a href="'. $slider_url .'">';
+						echo wp_get_attachment_image( $slider, 'mainBanner_xs' );
+						echo '</a>';
 					} else {
-						echo wp_get_attachment_image( $slider, 'mainBanner_lg' );	
+						echo '<a href="'. $slider_url .'">';
+						echo wp_get_attachment_image( $slider, 'mainBanner_lg' );
+						echo '</a>';	
 					}
 				?>
 			</div>

@@ -27,7 +27,15 @@ get_header(); ?>
 					<div class="user-content">
 						<h1 class="title"><?php the_title() ?></h1>
 						<hr>
-						<?php the_content(); ?>
+						<div class="contact-form col-xs-12 col-sm-8">
+							<?php echo do_shortcode('[wpforms id="284"]'); ?>
+						</div>
+						<div class="address col-xs-12 col-sm-4">
+							<div class="wrapper">
+								<?php  the_content(); ?> 
+							</div>
+							
+						</div>
 					</div>
 				</div>
 				<?php } else { 
