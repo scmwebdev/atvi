@@ -21,3 +21,5 @@ env.php
 
 #ignore wp-config.php
 backend/wp-config.php
+
+.DS_Store

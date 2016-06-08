@@ -8,36 +8,21 @@
 get_header(); ?>
 <div id="primary" class="content-area <?php echo get_the_title() ?> frontpage">
 	<main id="main" class="site-main clearfix" role="main">
-		<div class="carousel" id="atvi-carousel">
-			<?php for($i = 1; $i <= 4; $i++) { 
-				$slider =  ${'slider_'.$i} = get_field("slider_" . $i);
-				$slider_url =  ${'slider_'.$i.'_url'} = get_field("slider_" . $i.'_url');
-				if($slider) {
-			?>
-			<div class="carousel-slider-<?php echo $i; ?>">
-				<?php
-					if(wpmd_is_phone()) {
-						echo '<a href="'. $slider_url .'">';
-						echo wp_get_attachment_image( $slider, 'mainBanner_xs' );
-						echo '</a>';
-					} else {
-						echo '<a href="'. $slider_url .'">';
-						echo wp_get_attachment_image( $slider, 'mainBanner_lg' );
-						echo '</a>';	
-					}
-				?>
-			</div>
+		<?php 
 
-			<?php } else {
-
-					// return false;
-				} //endof if
-			} //endof for
-			?>
-		</div>
-		<div class="highlight __spacepad">
+			if (has_post_thumbnail()) {
+				the_post_thumbnail();
+			} else {
+				get_main_banner();
+			}
+		?>
+		<div class="segment highlight __spacepad">
 			<div class="container">
-				<div class="item clearfix">
+				<div class="segment-header">
+					<h2 class="title">ATVI</h2>
+					<p class="lead">ATVI senantiasa menyambut hangat kehadiran para generasi calon insan televisi masa depan untuk bergabung bersama di <span class="slogan">"Kampus Broadcast Sebenarnya".</span></p>
+				</div>
+				<div class="segment-content">
 				<?php for($i = 1; $i <= 6; $i++) { 
 					$tagline =  ${'tagline_'.$i} = get_field("tagline_" . $i);
 					$tagline_desc =  ${'tagline_desc_'.$i} = get_field("tagline_desc_" . $i);
@@ -63,13 +48,15 @@ get_header(); ?>
 				</div>
 				<?php } ?>
 				</div>
-			<hr>
 			</div>
 		</div>
-		<div class="penjurusan __spacepad">
+		<div class="segment penjurusan __spacepad">
 			<div class="container">
-				<h2 class="title text-center">Penjurusan</h2>
-				<div class="item clearfix">
+				<div class="segment-header">
+					<h2 class="title">Penjurusan</h2>
+					<p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ornare mollis erat, eu sollicitudin ligula sollicitudin eget.</p>
+				</div>
+				<div class="segment-content clearfix">
 					<?php 
 						$jurusan1_text = get_field('jurusan_1');
 						$jurusan1_img = get_field('jurusan_1_img');
@@ -102,10 +89,10 @@ get_header(); ?>
 				</div>
 			</div>
 		</div>
-		<div class="warta-berita __spacepad">
-			<div class="warta-berita-header">
-				<div class="container">
-					<h2 class="title text-center">Warta Berita</h2>
+		<div class="segment warta-berita __spacepad">
+			<div class="container spacepad">
+				<div class="segment-header warta-berita-header">
+					<h2 class="title">Ikuti Event & Berita Terbaru tentang ATVI</h2>
 					<ul class="nav nav-pills" id="warta-berita-controller">
 					  <li role="presentation" data-warta="news" class="active"><a>Berita</a></li>
 					  <li role="presentation" data-warta="events"><a>Events</a></li>
@@ -217,7 +204,7 @@ get_header(); ?>
 				</div>
 			</div>
 		</div>
-		<div class="video video-latest __spacepad">
+		<!-- <div class="video video-latest __spacepad">
 			<div class="container">
 				<h2 class="title text-center">Latest Video</h2>
 				<div class="item clearfix __spacepad">
@@ -281,7 +268,7 @@ get_header(); ?>
 			<div class="container">
 				
 			</div>
-		</div>
+		</div> -->
 	</main><!-- #main -->
 </div><!-- #primary -->
 
