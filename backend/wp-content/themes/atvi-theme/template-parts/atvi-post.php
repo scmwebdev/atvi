@@ -6,7 +6,7 @@ $category = esc_html( $get_category[0]->name);
 
 ?>
 
-<div class="item-list col-xs-12 col-sm-6">
+<div class="item-list item-list-<?php echo $category; ?> col-xs-12 col-sm-6">
 	<div class="item-list-container">
 		<div class="item-list-thumbnail __hovertype-2">
 			<a href="<?php the_permalink(); ?>">
