@@ -58,7 +58,7 @@ class WPForms_Builder_Panel_Settings extends WPForms_Builder_Panel {
 			'notifications' => __( 'Notification', 'wpforms' ),
 			'confirmation'  => __( 'Confirmation', 'wpforms' ),
 		);
-		$sections = apply_filters( 'wpforms_builder_settings_sections', $sections );
+		$sections = apply_filters( 'wpforms_builder_settings_sections', $sections, $this->form_data );
 		foreach( $sections as $slug => $section ) {
 			$this->panel_sidebar_section( $section, $slug  );
 		}
@@ -107,14 +107,6 @@ class WPForms_Builder_Panel_Settings extends WPForms_Builder_Panel {
 			'hide_title_desc',
 			$this->form_data,
 			__( 'Hide form title and description area', 'wpforms' )
-		);
-		wpforms_panel_field(
-			'text',
-			'settings',
-			'pagebreak_prev',
-			$this->form_data,
-			__( 'Last Previous Label', 'wpforms' ),
-			array( 'default' => __( 'Previous', 'wpforms' ) )
 		);
 		wpforms_panel_field(
 			'text',
@@ -313,6 +305,7 @@ class WPForms_Builder_Panel_Settings extends WPForms_Builder_Panel {
 		do_action( 'wpforms_form_settings_confirmation', $this );
 		echo '</div>';
 
+		do_action( 'wpforms_form_settings_panel_content', $this );
 	}
 }
 new WPForms_Builder_Panel_Settings;

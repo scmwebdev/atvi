@@ -28,15 +28,16 @@ class WPForms_Frontend {
 		$this->forms = array();
 
 		// Actions
-		add_action( 'wpforms_frontend_output_success', array( $this, 'confirmation'  ), 10,  2 );
-		add_action( 'wpforms_frontend_output',         array( $this, 'head'          ), 5,   5 );
-		add_action( 'wpforms_frontend_output',         array( $this, 'fields'        ), 10,  5 );
-		add_action( 'wpforms_frontend_output',         array( $this, 'honeypot'      ), 15,  5 );
-		add_action( 'wpforms_frontend_output',         array( $this, 'recaptcha'     ), 20,  5 );
-		add_action( 'wpforms_frontend_output',         array( $this, 'foot'          ), 25,  5 );
-		add_action( 'wp_enqueue_scripts',              array( $this, 'assets_header' )         );
-		add_action( 'wp_footer',                       array( $this, 'assets_footer' )         );
-		add_action( 'wp_footer',                       array( $this, 'footer_end'    ), 99     );
+		add_action( 'wpforms_frontend_output_success', array( $this, 'confirmation'   ), 10,  2 );
+		add_action( 'wpforms_frontend_output',         array( $this, 'head'           ), 5,   5 );
+		add_action( 'wpforms_frontend_output',         array( $this, 'page_indicator' ), 10,  5 );
+		add_action( 'wpforms_frontend_output',         array( $this, 'fields'         ), 10,  5 );
+		add_action( 'wpforms_frontend_output',         array( $this, 'honeypot'       ), 15,  5 );
+		add_action( 'wpforms_frontend_output',         array( $this, 'recaptcha'      ), 20,  5 );
+		add_action( 'wpforms_frontend_output',         array( $this, 'foot'           ), 25,  5 );
+		add_action( 'wp_enqueue_scripts',              array( $this, 'assets_header'  )         );
+		add_action( 'wp_footer',                       array( $this, 'assets_footer'  )         );
+		add_action( 'wp_footer',                       array( $this, 'footer_end'     ), 99     );
 
 		// Register shortcode
 		add_shortcode( 'wpforms', array( $this, 'shortcode' ) );
@@ -186,11 +187,115 @@ class WPForms_Frontend {
 		if ( !empty( $errors['header'] ) ) {
 
 			echo '<div class="wpforms-error-container">';
-
-				echo esc_html( $errors['header'] );
+				
+				$allow = array(
+					'a'      => array(
+						'href'  => array(),
+						'title' => array()
+					),
+					'br'     => array(),
+					'em'     => array(),
+					'strong' => array(),
+					'p'      => array(),
+				);
+				echo wp_kses( $errors['header'], $allow );
 
 			echo '</div>';
 		}
+	}
+
+	/**
+	 * Page Indictor
+	 *
+	 * This displays if the form contains pagebreaks and is configured to show
+	 * a page indicator in the top pagebreak settings.
+	 *
+	 * @since 1.2.1
+	 * @param array $form_data
+	 * @param object $form
+	 * @param mixed $title
+	 * @param mixed $description
+	 * @param array $errors
+	 */
+	public function page_indicator( $form_data, $form, $title, $description, $errors ) {
+
+		$pagebreak_top = wpforms_get_pagebreak( $form_data, 'top' );
+
+		if ( empty( $pagebreak_top['indicator'] ) || 'none' == apply_filters( 'wpforms_frontend_indicator_theme', $pagebreak_top['indicator'], $form_data ) ) {
+			return;
+		}
+
+		$pagebreak = array(
+			'indicator' => sanitize_html_class( $pagebreak_top['indicator'] ),
+			'color'     => wpforms_sanitize_hex_color( $pagebreak_top['indicator_color'] ),
+			'pages'     => wpforms_get_pagebreak( $form_data, 'pages' ),
+		);
+		$p = 1;
+
+		printf('<div class="wpforms-page-indicator %s" data-indicator="%s" data-indicator-color="%s">',
+			$pagebreak['indicator'],
+			$pagebreak['indicator'],
+			$pagebreak['color']
+		);
+			
+			if ( 'circles' == $pagebreak['indicator'] ) {
+
+				// Circles theme
+				foreach ( $pagebreak['pages'] as $page ) {
+					$class = ( 1 === $p ) ? 'active' : '';
+					$bg    = ( 1 === $p ) ? 'style="background-color:' . $pagebreak['color'] . '"' : '';
+					printf( '<div class="wpforms-page-indicator-page %s wpforms-page-indicator-page-%d">', $class, $p );
+						printf( '<span class="wpforms-page-indicator-page-number" %s>%d</span>', $bg, $p );
+						if ( !empty( $page['title'] ) ) {
+							printf( '<span class="wpforms-page-indicator-page-title">%s<span>', esc_html( $page['title'] ) );
+						}
+					echo '</div>';
+					$p++;
+				}
+
+			} elseif ( 'connector' == $pagebreak['indicator'] ) {
+
+				// Connector theme
+				foreach ( $pagebreak['pages'] as $page ) {
+					$class  = ( 1=== $p ) ? 'active ' : '';
+					$bg     = ( 1=== $p ) ? 'style="background-color:' . $pagebreak['color'] . '"' : '';
+					$border = ( 1=== $p ) ? 'style="border-top-color:' . $pagebreak['color'] . '"' : '';
+					$width  = 100/(count($pagebreak['pages'])) . '%';
+					printf( '<div class="wpforms-page-indicator-page %s wpforms-page-indicator-page-%d" style="width:%s;">', $class, $p, $width );
+						printf( '<span class="wpforms-page-indicator-page-number" %s>%d<span class="wpforms-page-indicator-page-triangle" %s></span></span>', $bg, $p, $border );
+						if ( !empty( $page['title'] ) ) {
+							printf( '<span class="wpforms-page-indicator-page-title">%s<span>', esc_html( $page['title'] ) );
+						}
+					echo '</div>';
+					$p++;
+				}
+
+			} elseif ( 'progress' == $pagebreak['indicator'] ) {
+
+				// Progress theme
+				$p1    = !empty( $pagebreak['pages'][0]['title'] ) ? esc_html( $pagebreak['pages'][0]['title'] ) : '';
+				$sep   = empty( $p1 ) ? 'style="display:none;"' : '';
+				$width = 100/(count($pagebreak['pages'])) . '%';
+				$prog  = 'style="width:' . $width . ';background-color:' . $pagebreak['color'] . ';"';
+				$names = '';
+				$step  = __( 'Step', 'wpforms' );
+				$of    = __( 'of', 'wpforms' );
+				
+				foreach ( $pagebreak['pages'] as $page ) {
+					if ( !empty( $page['title'] ) ) {
+						$names .= sprintf( 'data-page-%d-title="%s" ', $p, esc_attr( $page['title'] ) );
+					}
+					$p++;
+				}
+				printf( '<span class="wpforms-page-indicator-page-title" %s>%s</span>', $names, $p1 );
+				printf( '<span class="wpforms-page-indicator-page-title-sep" %s> - </span>', $sep );				
+				printf( '<span class="wpforms-page-indicator-steps">%s <span class="wpforms-page-indicator-steps-current">1</span> %s %d</span>', $step, $of, count( $pagebreak['pages'] ) );
+				printf( '<div class="wpforms-page-indicator-page-progress-wrap"><div class="wpforms-page-indicator-page-progress" %s></div></div>', $prog );
+			}
+
+			do_action( 'wpforms_frontend_indicator', $pagebreak, $form_data );
+	
+		echo '</div>';
 	}
 
 	/**
@@ -202,7 +307,7 @@ class WPForms_Frontend {
 	 * @param mixed $title
 	 * @param mixed $description
 	 */
-	public function fields( $form_data, $form, $title, $description ) {
+	public function fields( $form_data, $form, $title, $description, $errors ) {
 
 		if ( empty( $form_data['fields'] ) )
 			return;
@@ -214,19 +319,31 @@ class WPForms_Frontend {
 		// Form fields area
 		echo '<div class="wpforms-field-container">';
 
+			// Pagebreak, begin first page
 			if ( $pagebreak ) {
-				echo '<div class="wpforms-page wpforms-page-1 wpforms-active">';
+				$pbt     = wpforms_get_pagebreak( $form_data, 'top');
+				$pbt_css = !empty( $pbt['css'] ) ? wpforms_sanitize_classes( $pbt['css'] ) : '';
+				echo '<div class="wpforms-page wpforms-page-1 ' . $pbt_css . '">';
 			}
 
-		foreach ( $fields as $field ) {
+			// Loop through all the fields we have
+			foreach ( $fields as $field ) {
 
 				if ( $field['type'] == 'pagebreak' ) {
-					$page++;
-					$form_data['page_total']   = $pagebreak;
-					$form_data['page_current'] = $page;
+					if ( !empty( $field['position'] ) && 'top' == $field['position'] ) {
+						continue;
+					} else {
+						$page++;
+						$form_data['page_total']   = $pagebreak;
+						$form_data['page_current'] = $page;
+					}
 				}
 
 				$field = apply_filters( 'wpforms_field_data', $field, $form_data );
+
+				if ( ! $fields ) {
+					continue;
+				}
 
 				// Basic generic attributes for easy filtering
 				$field_atts = array(
@@ -258,6 +375,14 @@ class WPForms_Frontend {
 					$user_classes = explode( ' ', str_replace('.', '', $field['css'] ) );
 					foreach( $user_classes as $user_class ) {
 						$field_atts['field_class'][] = sanitize_html_class( $user_class );
+					}
+				}
+				// Check input columns
+				if ( !empty( $field['input_columns'] ) ) {
+					if ( '2' == $field['input_columns'] ) {
+						$field_atts['field_class'][] = 'wpforms-list-2-columns';
+					} elseif ( '3' == $field['input_columns'] ) {
+						$field_atts['field_class'][] = 'wpforms-list-3-columns';
 					}
 				}
 				// Check size
@@ -332,20 +457,22 @@ class WPForms_Frontend {
 
 				echo '</div>';
 
-				// Page break
-				if ( $field['type'] == 'pagebreak' ) {
-
-					echo '</div>';
-
+				// Pagebreak, end current page and begin the next
+				if ( $field['type'] == 'pagebreak' && $page != $pagebreak ) {
 					$next = $page+1;
 					$last = $next == $pagebreak ? 'last' : '';
-					printf ('<div class="wpforms-page wpforms-page-%s %s" style="display:none;">', $next, $last );
+					$css  = !empty( $field['css'] ) ? wpforms_sanitize_classes( $field['css'] ) : '';
+					printf ('</div><div class="wpforms-page wpforms-page-%s %s %s" style="display:none;">', $next, $last, $css );
 				}
 			}
 
-			// End of final page break
+			// Pagebreak, end last page
 			if ( $pagebreak ) {
 
+				// If we don't have a bottom pagebreak, the form is pre-v1.2.1
+				// and this is for backwards compatibility.
+				$pbb = wpforms_get_pagebreak( $form_data, 'bottom' );
+				if ( ! $pbb ) {
 					$prev = !empty( $form_data['settings']['pagebreak_prev'] ) ? esc_html( $form_data['settings']['pagebreak_prev'] ) : __('Previous', 'wpforms' );
 					echo '<div class="wpforms-field wpforms-field-pagebreak">';
 						printf(
@@ -355,6 +482,7 @@ class WPForms_Frontend {
 							$prev
 						);
 					echo '</div>';
+				}
 
 				echo '</div>';
 			}
@@ -448,7 +576,17 @@ class WPForms_Frontend {
 
 			echo '<div class="wpforms-error-container">';
 
-				echo esc_html( $errors['footer'] );
+				$allow = array(
+					'a'      => array(
+						'href'  => array(),
+						'title' => array()
+					),
+					'br'     => array(),
+					'em'     => array(),
+					'strong' => array(),
+					'p'      => array(),
+				);
+				echo wp_kses( $errors['footer'], $allow );
 
 			echo '</div>';
 		}
@@ -457,8 +595,6 @@ class WPForms_Frontend {
 		echo '<div class="wpforms-submit-container" ' . $visible . '>';
 
 				echo '<input type="hidden" name="wpforms[id]" value="' . $form->ID . '">';
-
-				echo wp_nonce_field( 'wpforms-submit-' . $form->ID, 'wpforms[nonce]', true, false );
 
 				echo '<button type="submit" name="wpforms[submit]" class="wpforms-submit ' . implode( ' ', $submit_classes ) . '" id="wpforms-submit-' . $form->ID . '" value="wpforms-submit">' . $submit . '</button>';
 

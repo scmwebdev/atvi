@@ -50,7 +50,8 @@
 	position: fixed;
 	top: 125px;
 	left: 95px;
-	width: 400px
+	width: 400px;
+	z-index: 10;
 }
 
 #wpforms-panel-fields .wpforms-tabs li {
@@ -264,6 +265,49 @@
 	font-size: 12px;
 }
 
+/* Color picker */
+#wpforms-panel-fields .wpforms-field-option-row.color-picker-row {
+	overflow: visible;
+}
+
+#wpforms-panel-fields .wpforms-field-option-row .wpforms-color-picker {
+	height: auto;
+	padding-left: 30px !important;
+}
+
+#wpforms-panel-fields .color-picker-row .minicolors-theme-default .minicolors-swatch {
+	height: 24px
+}
+
+/* Toggle */
+#wpforms-panel-fields .wpforms-field-option-row .wpforms-toggle-icon {
+	display: block;
+	cursor: pointer;
+}
+
+#wpforms-panel-fields .wpforms-field-option-row .wpforms-toggle-icon i {
+	color: #aaa;
+	font-size: 24px;
+	vertical-align: middle;
+	margin-right: 6px;
+	height: 22px;
+}
+
+#wpforms-panel-fields .wpforms-field-option-row .wpforms-toggle-icon.wpforms-on i {
+	color: #83c11f;
+}
+
+#wpforms-panel-fields .wpforms-field-option-row .wpforms-toggle-icon-label {
+	text-transform: uppercase;
+	vertical-align: middle;
+	font-weight: 600;
+}
+
+#wpforms-panel-fields .wpforms-field-option-row .wpforms-toggle-icon input {
+	display: none;
+}
+
+
 /* Field Option groups (Basic, Advanced, Conditionals, etc) */
 #wpforms-panel-fields .wpforms-field-option-group-toggle {
 	color: #444;
@@ -415,12 +459,6 @@
 	display: none;
 }
 
-/* Pagebreak */
-
-#wpforms-panel-fields .wpforms-field-option-pagebreak.first .wpforms-field-option-row-prev {
-	display: none
-}
-
 /* Payment Multiple Items */
 
 #wpforms-panel-fields .wpforms-field-option-payment-multiple .wpforms-field-option-row-choices li input[type=text] {
@@ -462,9 +500,13 @@
 #wpforms-panel-fields .wpforms-field {
 	border: 1px solid #fff;
 	padding: 10px;
-	margin: 0 0 10px 0;
+	margin: 0 0 5px 0;
 	font-size:14px;
 	position: relative;
+}
+
+#wpforms-panel-fields .wpforms-field.wpforms-field-stick {
+	cursor: default;
 }
 
 #wpforms-panel-fields .wpforms-field .wpforms-field-row {
@@ -517,6 +559,11 @@
 
 #wpforms-panel-fields .wpforms-field:hover .wpforms-field-helper {
 	opacity: 1;
+}
+
+#wpforms-panel-fields .wpforms-field.wpforms-field-stick .wpforms-field-delete,
+#wpforms-panel-fields .wpforms-field.wpforms-field-stick .wpforms-field-helper {
+	display: none !important;
 }
 
 #wpforms-panel-fields .wpforms-field input[readonly],
@@ -797,12 +844,13 @@
 }
 
 /* Page break field */
-#wpforms-panel-fields .wpforms-pagebreak-buttons {
+#wpforms-panel-fields .wpforms-field-pagebreak .wpforms-pagebreak-buttons {
 	text-align: center;
-	margin: 0 0 30px 0;
+	margin: 0 0 22px 0;
+	overflow: hidden;
 }
 
-#wpforms-panel-fields .wpforms-pagebreak-button {
+#wpforms-panel-fields .wpforms-field-pagebreak .wpforms-pagebreak-button {
 	font-size: 14px;
 	background: #ddd;
 	border: none;
@@ -811,41 +859,128 @@
 	margin: 0 10px;
 	min-width: 85px;
 	display: inline-block;
+	cursor: pointer;
+}
+
+#wpforms-panel-fields .wpforms-field-pagebreak .wpforms-pagebreak-buttons.wpforms-pagebreak-buttons-left {
+	text-align: left;
+}
+
+#wpforms-panel-fields .wpforms-field-pagebreak .wpforms-pagebreak-buttons.wpforms-pagebreak-buttons-left .wpforms-pagebreak-button {
+	margin: 0 20px 0 0;
+}
+
+#wpforms-panel-fields .wpforms-field-pagebreak .wpforms-pagebreak-buttons.wpforms-pagebreak-buttons-right {
+	text-align: right;
+}
+
+#wpforms-panel-fields .wpforms-field-pagebreak .wpforms-pagebreak-buttons.wpforms-pagebreak-buttons-right .wpforms-pagebreak-button {
+	margin: 0 0 0 20px;
+}
+
+#wpforms-panel-fields .wpforms-field-pagebreak .wpforms-pagebreak-buttons.wpforms-pagebreak-buttons-split .wpforms-pagebreak-prev {
+	float: left;
+	margin: 0;
+}
+
+#wpforms-panel-fields .wpforms-field-pagebreak .wpforms-pagebreak-buttons.wpforms-pagebreak-buttons-split .wpforms-pagebreak-next {
+	float: right;
+	margin: 0;
+}
+
+#wpforms-panel-fields .wpforms-field-pagebreak .wpforms-pagebreak-divider {
+	position: relative;
+	height: 30px;
+	text-align: center;
 }
 
 #wpforms-panel-fields .wpforms-field-pagebreak .line {
 	display: block;
 	border-top: 1px dashed #aaa;
-	margin: 20px 0;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 100%;
 }
 
 #wpforms-panel-fields .wpforms-field-pagebreak.active .pagebreak-label {
 	background-color: #f6f9fc;
 }
 
-#wpforms-panel-fields .wpforms-field-pagebreak.first .wpforms-pagebreak-prev {
-	display: none;
-}
-
 #wpforms-panel-fields .wpforms-field-pagebreak .pagebreak-label {
-	position: absolute;
-	left: 50%;
-	margin-left: -50px;
-	top: -10px;
-	width: 100px;
-	text-align: center;
 	font-size: 14px;
 	font-weight: 600;
 	background-color: #fff;
+	position: relative;
+	padding: 5px 10px;
+	display: inline-block;
+	z-index: 2;
 }
 
-#wpforms-panel-fields .wpforms-field-pagebreak-last {
-	text-align: center;
-	display: none;
+#wpforms-panel-fields .wpforms-field-pagebreak .wpforms-pagebreak-title {
+	font-weight: 400;
+	color: #999;
 }
 
-#wpforms-panel-fields .wpforms-field-pagebreak-last button {
-	cursor: pointer;
+#wpforms-panel-fields .wpforms-field-pagebreak.wpforms-pagebreak-normal {
+	border: none;
+	padding: 0;
+	margin: 0px -30px 20px -30px;
+}
+
+#wpforms-panel-fields .wpforms-field-pagebreak.wpforms-pagebreak-normal .wpforms-pagebreak-divider {
+	background-color: #6b6b6b;
+	height: 60px;
+	padding-top: 16px;
+}
+
+#wpforms-panel-fields .wpforms-field-pagebreak.wpforms-pagebreak-normal .pagebreak-label {
+	background-color: #6b6b6b;
+	color: #eee;
+	font-weight: 400;
+}
+
+#wpforms-panel-fields .wpforms-field-pagebreak.wpforms-pagebreak-normal .wpforms-pagebreak-title {
+	color: #ddd;
+}
+
+#wpforms-panel-fields .wpforms-field-pagebreak.wpforms-pagebreak-normal:hover .wpforms-pagebreak-divider,
+#wpforms-panel-fields .wpforms-field-pagebreak.wpforms-pagebreak-normal:hover .pagebreak-label,
+#wpforms-panel-fields .wpforms-field-pagebreak.wpforms-pagebreak-normal.active .wpforms-pagebreak-divider,
+#wpforms-panel-fields .wpforms-field-pagebreak.wpforms-pagebreak-normal.active .pagebreak-label {
+	background-color: #777;
+}
+
+#wpforms-panel-fields .wpforms-field-pagebreak.wpforms-pagebreak-normal.active {
+	background-color: #fff;
+}
+
+#wpforms-panel-fields .wpforms-field-pagebreak.wpforms-pagebreak-normal .wpforms-pagebreak-buttons {
+	border: 1px solid #fff;
+	padding: 10px;
+	margin: 0 30px 10px;
+}
+
+#wpforms-panel-fields .wpforms-field-pagebreak.wpforms-pagebreak-normal:hover .wpforms-pagebreak-buttons {
+	border: 1px dashed #ddd;
+}
+
+#wpforms-panel-fields .wpforms-field-pagebreak.wpforms-pagebreak-normal.active .wpforms-pagebreak-buttons {
+	background-color: #f6f9fc;
+	border: 1px solid #eee;
+}
+
+#wpforms-panel-fields .wpforms-field-pagebreak.wpforms-pagebreak-normal .wpforms-field-delete,
+#wpforms-panel-fields .wpforms-field-pagebreak.wpforms-pagebreak-normal .wpforms-field-helper {
+	right: 40px;
+}
+
+#wpforms-panel-fields .wpforms-field-pagebreak.wpforms-pagebreak-bottom .wpforms-pagebreak-divider  {
+/*	display: none;*/
+}
+
+#wpforms-panel-fields .wpforms-field-pagebreak.wpforms-pagebreak-bottom .wpforms-pagebreak-buttons {
+	margin: 0;
 }
 
 /* Payment single field */
@@ -886,8 +1021,6 @@
 #wpforms-panel-fields .wpforms-field-credit-card.size-large .format-selected {
 	width: 100%;
 }
-
-
 
 #wpforms-panel-fields .wpforms-field-credit-card .format-selected,
 #wpforms-panel-fields .wpforms-field-credit-card.size-medium .format-selected {
@@ -938,6 +1071,31 @@
 	padding-top: 8px;
 }
 
+/* Choice input layouts */
+#wpforms-panel-fields  ul.primary-input {
+	margin-bottom: 0;
+}
+
+#wpforms-panel-fields  .wpforms-list-2-columns ul,
+#wpforms-panel-fields  .wpforms-list-3-columns ul {
+	display: -ms-flex;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
+
+#wpforms-panel-fields  .wpforms-list-2-columns ul li {
+	width: 50%;
+	display: block;
+	padding-right: 26px;
+}
+
+#wpforms-panel-fields  .wpforms-list-3-columns ul li {
+	width: 33.3333%;
+	display: block;
+	padding-right: 26px !important;
+}
 
 /* Captchas and submit */
 #wpforms-panel-fields .wpforms-field-recaptcha {
@@ -957,4 +1115,43 @@
 	padding: 8px 20px;
 	color: #000;
 	cursor: pointer;
+}
+
+/* Drag and Drop */
+
+#wpforms-panel-fields .wpforms-field-dragging {
+	background-color: #f5f5f5;
+}
+
+#wpforms-panel-fields .wpforms-field-drag-out {
+	display: block;
+	width: 48%;
+	margin: 0;
+	background: #0e6cad;
+	border: none;
+	color: #fff;
+	padding: 12px 5px 12px 18px;
+	border-radius: 2px;
+	text-align: left;
+}
+
+#wpforms-panel-fields .wpforms-field-drag-over {
+	border: 1px dashed #ddd;
+	padding: 20px 10px;
+	margin: 0 0 10px 0;
+	font-size: 14px;
+	width: 100%;
+	color: #444;
+	text-align: center;
+}
+
+#wpforms-panel-fields .wpforms-field-drag-pending {
+	background-color: #f6f9fc;
+	border: 1px solid #eee;
+}
+
+#wpforms-panel-fields .wpforms-field-drag-pending .fa {
+	margin-left: 8px;
+	font-size: 18px;
+	color: #666;
 }

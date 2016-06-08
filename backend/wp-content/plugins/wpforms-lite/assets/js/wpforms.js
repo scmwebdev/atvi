@@ -154,17 +154,20 @@
 		$(document).on('click', '.wpforms-page-button', function(event) {
 			event.preventDefault();
 
-			var $this   = $(this),
-				valid   = true,
-				action  = $(this).data('action'),
-				page    = $this.data('page'),
-				next    = page+1,
-				prev    = page-1,
-				formID  = $this.data('formid'),
-				$form   = $this.closest('.wpforms-form'),
-				$page   = $form.find('.wpforms-page-'+page),
-				$submit = $form.find('.wpforms-submit-container');
+			var $this      = $(this),
+				valid      = true,
+				action     = $(this).data('action'),
+				page       = $this.data('page'),
+				page2      = page;
+				next       = page+1,
+				prev       = page-1,
+				formID     = $this.data('formid'),
+				$form      = $this.closest('.wpforms-form'),
+				$page      = $form.find('.wpforms-page-'+page),
+				$submit    = $form.find('.wpforms-submit-container');
+				$indicator = $form.find('.wpforms-page-indicator');
 
+			// Toggling between pages
 			if ( action == 'next' ){
 				// Validate
 				if(typeof $.fn.validate !== 'undefined') { 
@@ -178,6 +181,7 @@
 				}
 				// Move to next page
 				if (valid) {
+					page2 = next;
 					$page.hide();
 					var $nextPage = $form.find('.wpforms-page-'+next);
 					$nextPage.show();
@@ -191,6 +195,7 @@
 				}
 			} else if ( action == 'prev' ) {
 				// Move to prev page
+				page2 = prev;
 				$page.hide();
 				$form.find('.wpforms-page-'+prev).show();
 				$submit.hide();
@@ -198,6 +203,35 @@
 				$('html, body').animate({
 					scrollTop: $form.offset().top-75
 				}, 1000);
+			}
+
+			if ( $indicator ) {
+				var theme = $indicator.data('indicator'),
+					color = $indicator.data('indicator-color');
+				if ('connector' === theme || 'circles' === theme) {
+					$indicator.find('.wpforms-page-indicator-page').removeClass('active');
+					$indicator.find('.wpforms-page-indicator-page-'+page2).addClass('active');
+					$indicator.find('.wpforms-page-indicator-page-number').removeAttr('style');
+					$indicator.find('.active .wpforms-page-indicator-page-number').css('background-color', color);
+					if ( 'connector' == theme) {
+						$indicator.find('.wpforms-page-indicator-page-triangle').removeAttr('style');
+						$indicator.find('.active .wpforms-page-indicator-page-triangle').css('border-top-color', color);
+					}
+				} else if ('progress' === theme) {
+					var $pageTitle = $indicator.find('.wpforms-page-indicator-page-title'),
+						$pageSep   = $indicator.find('.wpforms-page-indicator-page-title-sep'),
+						totalPages = ($('.wpforms-page').length),
+						width = (page2/totalPages)*100;
+					$indicator.find('.wpforms-page-indicator-page-progress').css('width', width+'%');
+					$indicator.find('.wpforms-page-indicator-steps-current').text(page2);
+					if ($pageTitle.data('page-'+page2+'-title')) {
+						$pageTitle.css('display','inline').text($pageTitle.data('page-'+page2+'-title'));
+						$pageSep.css('display','inline');
+					} else {
+						$pageTitle.css('display','none');
+						$pageSep.css('display','none');
+					}
+				}
 			}
 		});
 

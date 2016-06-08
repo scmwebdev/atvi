@@ -67,6 +67,14 @@ abstract class WPForms_Field {
 	public $form_id;
 
 	/**
+	 * Current form data in admin builder.
+	 *
+	 * @since 1.1.1
+	 * @var mixed, int or false
+	 */
+	public $form_data;
+
+	/**
 	 * Primary class constructor.
 	 *
 	 * @since 1.0.0
@@ -217,6 +225,16 @@ abstract class WPForms_Field {
 					$output .=  sprintf( ' <i class="fa fa-question-circle wpforms-help-tooltip" title="%s"></i>', esc_attr( $args['tooltip'] ) );
 				}
 				$output .= '</label>';
+				break;
+
+			// Toggle
+			case 'toggle':
+				$checked = checked( '1', $args['value'], false );
+				$icon    = $args['value'] ? 'fa-toggle-on' : 'fa-toggle-off';
+				$cls     = $args['value'] ? 'wpforms-on' : 'wpforms-off';
+				$status  = $args['value'] ? __( 'On', 'wpforms' ) : __( 'Off', 'wpforms' );
+				$output  = sprintf( '<span class="wpforms-toggle-icon %s"><i class="fa %s" aria-hidden="true"></i> <span class="wpforms-toggle-icon-label">%s</span>', $cls, $icon, $status );
+				$output .= sprintf( '<input type="checkbox" class="%s" id="wpforms-field-option-%d-%s" name="fields[%d][%s]" value="1" %s %s></span>', $class, $id, $slug, $id, $slug, $checked, $data );
 				break;
 
 			// Select
@@ -385,6 +403,20 @@ abstract class WPForms_Field {
 				$output  = $this->field_element( 'checkbox', $field, array( 'slug' => 'sublabel_hide', 'value' => $value, 'desc' => __( 'Hide Sub-Labels', 'wpforms' ), 'tooltip' => $tooltip ), false );
 				$output  = $this->field_element( 'row',      $field, array( 'slug' => 'sublabel_hide', 'content' => $output ), false );
 				break;
+
+			// Size
+			case 'input_columns' :
+				$value   = !empty( $field['input_columns'] ) ? esc_attr( $field['input_columns'] ) : '';
+				$tooltip = __( 'Select the layout for displaying field choices.', 'wpforms' );
+				$options = array(
+					''  => __( 'One Column', 'wpforms' ),
+					'2' => __( 'Two Columns', 'wpforms'),
+					'3' => __( 'Three Columns', 'wpforms' ),
+				);
+				$output  = $this->field_element( 'label',  $field, array( 'slug' => 'input_columns', 'value' => __( 'Choice Layout', 'wpforms' ), 'tooltip' => $tooltip ), false );
+				$output .= $this->field_element( 'select', $field, array( 'slug' => 'input_columns', 'value' => $value, 'options' => $options ), false );
+				$output  = $this->field_element( 'row',    $field, array( 'slug' => 'input_columns', 'content' => $output ), false );
+				break;
 		}
 
 		if ( $echo ) {
@@ -464,8 +496,8 @@ abstract class WPForms_Field {
 			die( __( 'No field type found', 'wpforms' ) );
 
 		// Grab field data
+		$field_args     = !empty( $_POST['defaults'] ) ? (array) $_POST['defaults'] : array();
 		$field_type     = esc_attr( $_POST['type'] );
-		$field_required = '';
 		$field_id       = wpforms()->form->next_field_id( $_POST['id'] );
 		$field          = array(
 			'id'          => $field_id,
@@ -473,9 +505,10 @@ abstract class WPForms_Field {
 			'label'       => $this->name,
 			'description' => '',
 		);
-
+		$field          = wp_parse_args( $field_args, $field );
 		$field          = apply_filters( 'wpforms_field_new_default', $field );
-		$field_required = apply_filters( 'wpforms_field_new_required', $field_required, $field );
+		$field_required = apply_filters( 'wpforms_field_new_required', '', $field );
+		$field_class    = apply_filters( 'wpforms_field_new_class', '', $field );
 
 		// Field types that default to required
 		if ( !empty( $field_required ) ) {
@@ -487,7 +520,7 @@ abstract class WPForms_Field {
 		ob_start();
 		$this->field_preview( $field );
 		$prev     = ob_get_clean();
-		$preview  = sprintf( '<div class="wpforms-field wpforms-field-%s %s" id="wpforms-field-%d" data-field-id="%d">', $field_type, $field_required, $field['id'], $field['id'] );
+		$preview  = sprintf( '<div class="wpforms-field wpforms-field-%s %s %s" id="wpforms-field-%d" data-field-id="%d" data-field-type="%s">', $field_type, $field_required, $field_class, $field['id'], $field['id'], $field_type );
 		$preview .= sprintf( '<a href="#" class="wpforms-field-delete" title="%s"><i class="fa fa-times-circle"></i></a>', __( 'Delete Field', 'wpforms' ) );
 		$preview .= sprintf( '<span class="wpforms-field-helper">%s</span>', __( 'Click to edit. Drag to reorder.', 'wpforms' ) );
 		$preview .= $prev;

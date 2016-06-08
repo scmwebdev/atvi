@@ -208,6 +208,7 @@ class WPForms_Admin_Editor {
 			}
 			#wpforms-modal-select-form {
 				margin-bottom: 1em;
+				max-width: 100%;
 			}
 			#wpforms-modal .submitbox {
 				padding: 8px 16px;

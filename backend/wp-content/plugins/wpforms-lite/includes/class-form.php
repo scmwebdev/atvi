@@ -146,7 +146,7 @@ class WPForms_Form_Handler {
 				$entries = wpforms()->entry->delete_by( 'form_id', $id );
 			}
 
-			if ( ! $form || ! $entries ) {
+			if ( ! $form  ) {
 				return false;
 			}
 		}

@@ -28,10 +28,16 @@ class WPForms_Install {
 	 */
 	public function install() {
 
+		$wpforms_install             = new stdClass();
+		$wpforms_install->preview    = new WPForms_Preview;
+
+		// Form preview
+		$wpforms_install->preview->form_preview_check();
+
+		do_action( 'wpforms_install' );
+
 		// Set current version, to be referenced in future updates
 		update_option( 'wpforms_version', WPFORMS_VERSION );	
-
-		//@todo: Set any default settings we may decide is needed
 
 		// Abort so we only set the transient for single site installs
 		if ( is_network_admin() || isset( $_GET['activate-multi'] ) ) {

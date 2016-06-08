@@ -168,7 +168,7 @@ function wpforms_has_pagebreak( $form = false ) {
 	$fields = $form_data['fields'];
 
 	foreach ( $fields as $field ) {
-		if ( $field['type'] == 'pagebreak' ) {
+		if ( $field['type'] == 'pagebreak' && empty( $field['position'] ) ) {
 			$pagebreak = true;
 			$pages++;
 		}
@@ -179,6 +179,65 @@ function wpforms_has_pagebreak( $form = false ) {
 	} else {
 		return false;
 	}
+}
+
+/**
+ * Tries to find and return an top or bottom pagebreak.
+ *
+ * @since 1.2.1
+ * @param boolean $form
+ * @param string $type
+ * @return boolean
+ */
+function wpforms_get_pagebreak( $form = false, $type = false ) {
+	
+	$form_data = '';
+
+	if ( is_object( $form ) && !empty( $form->post_content ) ) {
+		$form_data = wpforms_decode( $form->post_content );
+	} elseif ( is_array( $form ) ) {
+		$form_data = $form;
+	}
+
+	if ( empty( $form_data['fields'] ) ) 
+		return false;
+
+	$fields = $form_data['fields'];
+	$pages  = array();
+	foreach ( $fields as $field ) {
+		if ( $field['type'] == 'pagebreak' ) {
+			$position = !empty( $field['position'] ) ? $field['position'] : false;
+			if ( $type == 'pages' && $position != 'bottom' ) {
+				$pages[] = $field;
+			} elseif ( $position == $type ) {
+				return $field;
+			}
+		} 
+	}
+
+	if ( !empty( $pages ) ) {
+		return $pages;
+	}
+	return false;
+}
+
+/**
+ * Sanitizes string of CSS classes.
+ *
+ * @since 1.2.1
+ * @param string $classes
+ * @return string
+ */
+function wpforms_sanitize_classes( $classes ) {
+
+	$css = array();
+	if ( !empty( $classes ) ) {
+		$the_classes = explode( ' ', str_replace('.', '', $classes ) );
+		foreach( $the_classes as $class ) {
+			$css[] = sanitize_html_class( $class );
+		}
+	}
+	return implode( ' ', $css );
 }
 
 /**
@@ -303,6 +362,28 @@ function wpforms_get_form_fields( $form = false, $whitelist = array() ) {
 	}
 
 	return $form_fields;
+}
+
+/**
+ * Get meta key value for a form field.
+ *
+ * @since 1.1.9
+ * @param int $id Field ID
+ * @param string $key Meta key
+ * @param array $form_data Form data array
+ * @return string
+ */
+function wpforms_get_form_field_meta( $id = '', $key = '', $form_data = '' ) {
+
+	if ( empty( $id ) || empty( $key ) || empty( $form_data ) ) {
+		return '';
+	}
+
+	if ( !empty( $form_data['fields'][$id]['meta'][$key] ) ) {
+		return $form_data['fields'][$id]['meta'][$key];
+	} else {
+		return '';
+	}
 }
 
 /**
@@ -630,6 +711,24 @@ function wpforms_countries() {
 		'ZW' => 'Zimbabwe',
 	);
 	return apply_filters( 'wpforms_countries', $countries );
+}
+
+/**
+ * Sanitizes hex color.
+ *
+ * @since 1.2.1
+ * @param string $color
+ * @return string
+ */
+function wpforms_sanitize_hex_color( $color ) {
+	if ( '' === $color ) {
+		return '';
+	}
+
+	// 3 or 6 hex digits, or the empty string.
+	if ( preg_match('|^#([A-Fa-f0-9]{3}){1,2}$|', $color ) ) {
+		return $color;
+	}
 }
 
 /**

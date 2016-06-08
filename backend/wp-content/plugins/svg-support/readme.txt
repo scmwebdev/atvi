@@ -3,8 +3,8 @@ Contributors: Benbodhi
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F7W2NUFAVQGW2
 Tags: svg, vector, css, style, mime, mime type, embed, img, inline
 Requires at least: 4.0
-Tested up to: 4.4
-Stable tag: 2.2.2
+Tested up to: 4.6
+Stable tag: 2.2.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,7 +59,8 @@ As with allowing uploads of any files, there is potential risks involved. Only a
 = Translations =
 
 * English - default, always included
-* Serbian - translated and submitted by Ogi Djuraskovic from [first site guide]( http://firstsiteguide.com/)
+* Serbian - translated and submitted by Ogi Djuraskovic from [first site guide](http://firstsiteguide.com/)
+* Spanish - translated and submitted by [Apasionados del Marketing](http://apasionados.es)
 * *Your translation? - [Just send it in](http://gowebben.com/contact/)*
 
 *Note:* This plugin is localized/translateable by default. This is very important for all users worldwide. So please contribute your language to the plugin to make it even more useful.<br />
@@ -108,6 +109,21 @@ I will put the answers to any questions asked here.
 2. Admin settings page (with new settings since V2.2)
 
 == Changelog ==
+
+= 2.2.3.2 =
+
+* Changed text domain to match plugin slug for localization.
+
+= 2.2.3.1 =
+
+* Attempt to fix ability to translate
+
+= 2.2.3 =
+
+* Modified code in svg-support/js/svg-inline.js and svg-support/js/min/svg-inline-min.js to allow JS control of the SVG elements and detect if they have been loaded (IMG tag swapped out). Thanks to [laurosello](https://wordpress.org/support/profile/laurosollero) for this suggestion and code contribution.
+* Fixed SVG thumbnails not displaying correctly in list view of the media library.
+* Cleaned up the code and comments a bit.
+* Added translation for Spanish. Thanks to [Apasionados del Marketing](http://apasionados.es) for the translation.
 
 = 2.2.2 =
 
@@ -182,6 +198,20 @@ I will put the answers to any questions asked here.
 
 == Upgrade Notice ==
 
+= 2.2.3.2 =
+
+* Changed text domain to match plugin slug for localization.
+
+= 2.2.3.1 =
+
+* This release attempts to fix translation issues.
+
+= 2.2.3 =
+
+* Feature - Changed code to allow JS detection if SVG has loaded and ability to control SVG using JS.
+* Fix - Thumbnail display in media library list view.
+* Added Spanish translation and cleaned up code/comments a bit.
+
 = 2.2.2 =
 
 * Fix - Another change from anonymous function that was triggering errors for some.
@@ -248,11 +278,13 @@ I will put the answers to any questions asked here.
 == Future Features ==
 * Option to choose which user ID can access the settings
 * Option to choose specific user ID's for usage restriction (both helpful if you have multiple administrators)
-* Better compatibility with visual editor and post formats
 
 Again, feel free to [shoot me suggestions](mailto:wp@benbodhi.com)
 
 == Credits ==
 Plugin by [Benbodhi Mantra](http://benbodhi.com/) [@benbodhi](http://twitter.com/benbodhi) from [GoWebben](http://gowebben.com/) [@GoWebben](http://twitter.com/gowebben)
 
+Thanks to [laurosello](https://wordpress.org/support/profile/laurosollero) for his code contribution in svg-inline.php.
 Thanks to Ogi Djuraskovic from [first site guide]( http://firstsiteguide.com/) for providing the Serbian translation!
+Thanks to [Apasionados del Marketing](http://apasionados.es) for the Spanish translation.
+Logo By W3C, CC BY 2.5, [https://commons.wikimedia.org/w/index.php?curid=1895005](https://commons.wikimedia.org/w/index.php?curid=1895005).

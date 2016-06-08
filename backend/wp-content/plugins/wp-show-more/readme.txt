@@ -3,8 +3,8 @@ Contributors: JAMOS Web Service
 Donate link:  http://www.jamos.ch
 Tags: show more, more, less, read more, read less
 Requires at least: 3.0.1
-Tested up to: 4.4.2
-Stable tag: 1.0.4
+Tested up to: 4.5.2
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,7 +15,11 @@ Hide the Text between a simple Shortcode.
 This plugin hides the text that is defined between the simple Shortcode. By clicking on the user-defined link, the hidden text becomes visible. It works via a Shortcode and can be placed everywhere!
 
 <p>
-Usage: <strong>[show_more more="your text" less="your text" color="#0066CC" list="»"] Your hidden Content [/show_more]</strong>
+Usage: <strong>[show_more more="TEXT" less="TEXT"] Content [/show_more]</strong><br /><br />
+You can use some parameters like:<br />
+- color="#0066CC"<br />
+- list="»"<br />
+- align="left"<br />
 </p>
 
 <p>
@@ -27,7 +31,7 @@ Feel free to try it <a href="http://www.jamos.ch/plugins/wp-show-more" target="_
 All you have to do is upload the plugin within your Wordpress Plugins menu and activate it. 
 Then, you can add the shortcode everywhere you want (pages, posts, widgets etc): 
 
-<strong>[show_more more="show more" less="show less" color="#0066CC" list="»"] Your hidden Content [/show_more]</strong> 
+<strong>[show_more more="show more" less="show less"] Your hidden Content [/show_more]</strong> 
 
 Of course, you can customize the text "show more".
 In case that you have any support inquiries, feel free to contact me.
@@ -40,6 +44,9 @@ In case that you have any support inquiries, feel free to contact me.
 = How can I change the Link color? =
 You can define the color with the attribute <strong>[color=“#ffcc00”]</strong> in the shortcode.
 
+= How to make it center? =
+Please use the parameter <strong>[align=“center”]</strong> in the shortcode.
+
 = Can I put a specific character in front of the link? =
 Yes you can. Define the character  with the attribute <strong>[list=“-”]</strong> in the shortcode.
 
@@ -51,6 +58,7 @@ Define the «read more» and «read less» text with the attribute <strong>[more
 * less="show less"
 * color="#0066CC"
 * list="»"
+* align="left" | "center" | "right"
 
 == Screenshots ==
 
@@ -63,9 +71,12 @@ You can upgrade your Plugin manually or automatically.
 
 == Changelog ==
 
+= 1.0.5 =
+- Add new parameter «align» to set the link as «left», «center» or «right»
+
 = 1.0.4 =
-* Fix the message «headers already sent»
-* Add the JavaScript code to the footer
+- Fix the message «headers already sent»
+- Add the JavaScript code to the footer
 
 = 1.0.3 =
 New functions, which allows you to use the shortcodes "more" and "less"

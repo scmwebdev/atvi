@@ -9,3 +9,11 @@
 #wpforms-overview .wp-list-table .column-entries {
 	width: 70px;
 }
+
+#wpforms-overview .wp-list-table .column-shortcode {
+	width: 150px;
+}
+
+#wpforms-overview .wp-list-table .column-created {
+	width: 145px;
+}

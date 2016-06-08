@@ -50,10 +50,10 @@ class WPForms_Overview_Table extends WP_List_Table {
 
 		$columns = array(
 			'cb'         => '<input type="checkbox" />',
-			// 'id'         => __( 'ID', 'wpforms' ),
 			'form_name'  => __( 'Name', 'wpforms' ),
 			'shortcode'  => __( 'Shortcode', 'wpforms' ),
 			'created'    => __( 'Created', 'wpforms' ),
+			// 'id'         => __( 'ID', 'wpforms' ),
 			//'modified'   => __( 'Modified', 'wpforms' ),
 			//'author'     => __( 'Author', 'wpforms' ),
 			//'php'        => __( 'PHP Code', 'wpforms' ),
@@ -96,11 +96,6 @@ class WPForms_Overview_Table extends WP_List_Table {
 				
 				case 'created':
 					$value = get_the_date( get_option( 'date_format' ), $form );
-					break;
-
-				case 'entries':
-					$count = wpforms()->entry->get_entries( array( 'form_id' => $form->ID ), true );
-					$value = sprintf( '<a href="%s">%d</a>', add_query_arg( array( 'view' => 'list', 'form_id' => $form->ID ), admin_url( 'admin.php?page=wpforms-entries' ) ), $count );
 					break;
 				
 				case 'modified':
@@ -155,6 +150,13 @@ class WPForms_Overview_Table extends WP_List_Table {
 			add_query_arg( array( 'view' => 'list', 'form_id' => $form->ID ), admin_url( 'admin.php?page=wpforms-entries' ) ),
 			__( 'View entries', 'wpforms' ),
 			__( 'Entries', 'wpforms' )
+		);
+
+		// Preview
+		$row_actions['preview_'] = sprintf( '<a href="%s" title="%s" target="_blank">%s</a>',
+			esc_url( wpforms()->preview->form_preview_url( $form->ID ) ),
+			__( 'View preview', 'wpforms' ),
+			__( 'Preview', 'wpforms' )
 		);
 
 		// Duplicate

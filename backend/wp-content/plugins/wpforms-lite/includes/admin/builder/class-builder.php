@@ -80,6 +80,9 @@ class WPForms_Builder {
 				$this->view = isset( $_GET['view'] ) ? $_GET['view'] : 'setup';
 			}
 
+			// Preview page check
+			wpforms()->preview->form_preview_check();
+
 			// Fetch form
 			$this->form = wpforms()->form->get( $form_id );
 
@@ -134,6 +137,8 @@ class WPForms_Builder {
 
 			if ( file_exists( WPFORMS_PLUGIN_DIR . 'includes/admin/builder/panels/class-' . $panel . '.php' ) ) {
 				require_once WPFORMS_PLUGIN_DIR . 'includes/admin/builder/panels/class-' . $panel . '.php';
+			} elseif ( file_exists( WPFORMS_PLUGIN_DIR . 'pro/includes/admin/builder/panels/class-' . $panel . '.php' ) ) {
+				require_once WPFORMS_PLUGIN_DIR . 'pro/includes/admin/builder/panels/class-' . $panel . '.php';
 			}
 		}
 	}
@@ -170,6 +175,13 @@ class WPForms_Builder {
 		);
 
 		wp_enqueue_style( 
+			'minicolors', 
+			WPFORMS_PLUGIN_URL . 'assets/css/jquery.minicolors.css', 
+			null, 
+			'2.2.3'
+		);
+
+		wp_enqueue_style( 
 			'wpforms-builder', 
 			WPFORMS_PLUGIN_URL . 'assets/css/admin-builder.css', 
 			null, 
@@ -179,8 +191,8 @@ class WPForms_Builder {
 		// JS
 		
 		wp_enqueue_media();
-
 		wp_enqueue_script( 'jquery-ui-sortable' );
+		wp_enqueue_script( 'jquery-ui-draggable' );
 
 		wp_enqueue_script( 
 			'serialize-object', 
@@ -223,6 +235,14 @@ class WPForms_Builder {
 		);
 
 		wp_enqueue_script( 
+			'minicolors', 
+			WPFORMS_PLUGIN_URL . 'assets/js/jquery.minicolors.min.js', 
+			array( 'jquery' ), 
+			'2.2.3', 
+			false
+		);
+
+		wp_enqueue_script( 
 			'wpforms-utils', 
 			WPFORMS_PLUGIN_URL . 'assets/js/admin-utils.js', 
 			array( 'jquery', 'serialize-object' ), 
@@ -244,6 +264,8 @@ class WPForms_Builder {
 				'ok'                     => __( 'OK', 'wpforms' ),
 				'close'                  => __( 'Close', 'wpforms' ),
 				'field'                  => __( 'Field', 'wpforms' ),
+				'field_locked'           => __( 'Field Locked', 'wpforms' ),
+				'field_locked_msg'       => __( 'This field cannot be deleted because it required by the form template.', 'wpforms' ),
 				'fields_available'       => __( 'Available Fields', 'wpforms' ),
 				'fields_unavailable'     => __( 'No fields available', 'wpforms' ),
 				'nonce'                  => wp_create_nonce( 'wpforms-builder' ),
@@ -267,6 +289,9 @@ class WPForms_Builder {
 				'delete_confirm'         => __( 'Are you sure you want to delete this field?', 'wpforms' ),
 				'error_title'            => __( 'Please enter a form title.', 'wpforms' ),
 				'error_choice'           => __( 'This item must contain at least one choice.', 'wpforms' ),
+				'off'                    => __( 'Off', 'wpforms' ),
+				'on'                     => __( 'On', 'wpforms' ),
+				'previous'               => __( 'Previous', 'wpforms' ),
 				'saved_state'            => '',
 				'smart_tags_show'        => __( 'Show Smart Tags', 'wpforms' ),
 				'smart_tags_hide'        => __( 'Hide Smart Tags', 'wpforms' ),
@@ -334,6 +359,11 @@ class WPForms_Builder {
 					<div class="wpforms-right">
 						
 						<?php if ( $this->form ) : ?>
+
+						<!--<a href="<?php echo esc_url( wpforms()->preview->form_preview_url( $form_id ) ); ?>" id="wpforms-preview" title="<?php _e( 'Preview Form', 'wpforms' ); ?>">
+							<i class="fa fa-eye"></i> 
+							<span class="text"><?php _e( 'Preview', 'wpforms' ); ?></span>
+						</a>-->
 						
 						<a href="#" id="wpforms-embed" title="<?php _e( 'Embed Form', 'wpforms' ); ?>">
 							<i class="fa fa-code"></i> 

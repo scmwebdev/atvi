@@ -115,13 +115,6 @@ class WPForms_Builder_Panel_Fields extends WPForms_Builder_Panel {
 					<?php do_action( 'wpforms_builder_preview', $this->form ); ?>
 				</div>
 
-				<p class="wpforms-field-pagebreak-last ">
-					<?php
-					$prev = !empty( $this->form_data['settings']['pagebreak_prev'] ) ? esc_html( $this->form_data['settings']['pagebreak_prev'] ) : __( 'Previous', 'wpforms' );
-					echo '<button class="wpforms-pagebreak-button wpforms-pagebreak-prev">' . $prev . '</button>';
-					?>
-				</p>
-
 				<p class="wpforms-field-recaptcha">
 					<img src="<?php echo WPFORMS_PLUGIN_URL; ?>/assets/images/recaptcha-placeholder.png">
 				</p>
@@ -242,12 +235,17 @@ class WPForms_Builder_Panel_Fields extends WPForms_Builder_Panel {
 
 		foreach( $fields as $field ) {
 
-			$css = ( isset( $field['size'] ) && !empty( $field['size'] ) ? 'size-' . esc_attr( $field['size'] ) : '' );
-			$css .= ( isset( $field['label_hide'] ) && $field['label_hide'] == '1' ? ' label_hide' : '' );
-			$css .= ( isset( $field['sublabel_hide'] ) && $field['sublabel_hide'] == '1' ? ' sublabel_hide' : '' );
-			$css .= ( isset( $field['required'] ) && $field['required'] == '1' ? ' required' : '' );
+			$css  = !empty( $field['size'] ) ? 'size-' . esc_attr( $field['size'] ) : '' ;
+			$css .= !empty( $field['label_hide'] ) && $field['label_hide'] == '1' ? ' label_hide' : '' ;
+			$css .= !empty( $field['sublabel_hide'] ) && $field['sublabel_hide'] == '1' ? ' sublabel_hide' : '';
+			$css .= !empty( $field['required'] ) && $field['required'] == '1' ? ' required' : '';
+			$css .= !empty( $field['input_columns'] ) && $field['input_columns'] == '2' ? ' wpforms-list-2-columns' : '';
+			$css .= !empty( $field['input_columns'] ) && $field['input_columns'] == '3' ? ' wpforms-list-3-columns' : '';
+			$css .= isset( $field['meta']['delete'] ) && $field['meta']['delete'] === false ? ' no-delete' : '';
+
+			$css = apply_filters( 'wpforms_field_preview_class', $css, $field );
 			
-			printf( '<div class="wpforms-field wpforms-field-%s %s" id="wpforms-field-%d" data-field-id="%d">', $field['type'], $css, $field['id'], $field['id'] );
+			printf( '<div class="wpforms-field wpforms-field-%s %s" id="wpforms-field-%d" data-field-id="%d" data-field-type="%s">', $field['type'], $css, $field['id'], $field['id'], $field['type'] );
 				
 				printf( '<a href="#" class="wpforms-field-delete" title="%s"><i class="fa fa-times-circle"></i></a>', __( 'Delete Field', 'wpforms' ) );
 				

@@ -66,14 +66,6 @@ class WPForms_Process {
 		$form         = wpforms()->form->get( $form_id );
 		$honeypot     = false;
 
-		//echo '<pre>' . print_r( $entry, true ) . '</pre>';
-
-		// Validate nonce
-		if ( ! wp_verify_nonce( $entry['nonce'], 'wpforms-submit-' . $form_id ) ) {
-			$this->errors[$form_id]['header'] = __( 'Unable to process the form entry.', 'wpforms' );
-			return;
-		}
-
 		// Validate form is real and active (published)
 		if ( !$form || 'publish' != $form->post_status ) {
 			$this->errors[$form_id]['header'] = __( 'Invalid form.', 'wpforms' );
@@ -150,18 +142,23 @@ class WPForms_Process {
 			// Process hooks/filter - this is where most add-ons should hook
 			// because at this point we have completed all field validation and
 			// formatted the data.
-			$this->fields = apply_filters( 'wpforms_process_before_filter', $this->fields, $entry, $form_data );
+			$this->fields = apply_filters( 'wpforms_process_filter', $this->fields, $entry, $form_data );
+
 			do_action( 'wpforms_process', $this->fields, $entry, $form_data );
 			do_action( "wpforms_process_{$form_id}", $this->fields, $entry, $form_data );
 
+			$this->fields = apply_filters( 'wpforms_process_after_filter', $this->fields, $entry, $form_data );
+
 			// One last error check - don't proceed if there are any errors
 			if ( ! empty( $this->errors[$form_id] ) ) {
-				$this->errors[$form_id]['header'] = __( 'Form has not been submitted, please see the errors below.', 'wpforms' );
+				if ( empty( $this->errors[$form_id]['header'] ) ) {
+					$this->errors[$form_id]['header'] = __( 'Form has not been submitted, please see the errors below.', 'wpforms' );
+				}
 				return;
 			}
 
 			// Success - add entry to database
-			$entry_id = 0;
+			$entry_id = $this->entry_save( $this->fields, '', $entry, $form_data['id'], $form_data );
 
 			// Success - send email notification
 			$this->entry_email( $this->fields, $entry, $form_data, $entry_id );
@@ -316,5 +313,20 @@ class WPForms_Process {
 		foreach( $email['address'] as $address ) {
 			$emails->send( $address, $email['subject'], $email['message'] );
 		}			
+	}
+
+	/**
+	 * Saves entry to database.
+	 *
+	 * @since 1.0.0
+	 * @param array $fields
+	 * @param array $entry
+	 * @param array $form_data
+	 */
+	public function entry_save( $fields, $entry_meta, $entry, $form_id, $form_data = '' ) {
+
+		do_action( 'wpforms_process_entry_save', $fields, $entry_meta, $entry, $form_id, $form_data );
+
+		return '0';
 	}
 }

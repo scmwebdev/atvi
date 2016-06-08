@@ -1,8 +1,8 @@
 === Easy WordPress Contact Form Plugin - WPForms Lite ===
 Contributors: wpforms, jaredatch, smub
-Tags: contact form, contact form plugin, contact button, contact me, custom form, custom contact form, form builder, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, payment form, survey form, donation form, email submit form, message form, mailchimp, mailchimp form, aweber, aweber form, paypal, paypal form, stripe, stripe form, getresponse, getresponse form, email subscription, contact form widget
+Tags: contact form, contact form plugin, contact button, contact me, custom form, custom contact form, form builder, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, payment form, survey form, donation form, email submit form, message form, mailchimp, mailchimp form, aweber, aweber form, paypal, paypal form, stripe, stripe form, getresponse, getresponse form, email subscription, contact form widget, user registration form, wordpress registration, wordpress login form 
 Requires at least: 4.4
-Tested up to: 4.5
+Tested up to: 4.5.2
 Stable tag: trunk
 License: GNU General Public License v2.0 or later
 
@@ -12,7 +12,7 @@ The best WordPress contact form plugin. Drag & Drop online form builder that hel
 
 = WordPress Contact Form Plugin =
 
-We believe that you shouldn't have to hire a developer to create a WordPress form. That's why we built <a href="https://wpforms.com/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion" rel="friend" title="WPForms">WPForms</a>, a drag & drop WordPress form builder that's EASY and POWERFUL.
+We believe that you shouldn't have to hire a developer to create a WordPress contact form. That's why we built <a href="https://wpforms.com/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion" rel="friend" title="WPForms">WPForms</a>, a drag & drop WordPress form builder that's EASY and POWERFUL.
 
 WPForms allow you to create beautiful contact forms, subscription forms, payment forms, and other type of forms for your site in minutes, not hours!
 
@@ -88,6 +88,7 @@ We also knew that our developer friends may want to extend it further. That's wh
 * <a href="https://wpforms.com/addons/getresponse-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion" rel="friend">GetResponse Forms</a> - Create GetResponse newsletter signup forms in WordPress to grow your email list.
 * <a href="https://wpforms.com/addons/paypal-standard-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion" rel="friend">PayPal Payment Forms</a> - Create PayPal forms to easily collect payments, donations, and online orders.
 * <a href="https://wpforms.com/addons/stripe-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion" rel="friend">Stripe Forms</a> - Easily collect payments, donations, and online orders with our Stripe addon.
+* <a href="https://wpforms.com/addons/user-registration-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion" rel="friend">User Registration Forms</a> - Create custom WordPress user registration form.
 * <a href="https://wpforms.com/addons/conditional-logic-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion" rel="friend">Smart Conditional Logic</a> - Show or hide fields and form sections based on user behavior.
 * Want us to add something else? Suggest a feature and we'll get it added!
 
@@ -158,6 +159,34 @@ Thank you
 Syed Balkhi
 
 == Changelog ==
+
+= 1.2.2.2 =
+- Fixed: Javascript asset not loading due to incorrect path
+
+= 1.2.2.1 =
+- Fixed: Form select inside modal window overflowing when a form exists with a long title
+
+= 1.2.2 =
+- Changed: Choice Layouts now use flexbox instead of CSS columns for better rendering
+- Fixed: Class name typo in a CSS column class introduced with 1.2.1
+- Fixed: PHP notice on Entries page when there are no forms
+
+= 1.2.1 =
+* Added: Drag and drop field buttons - simply drag the desired field to the form!
+* Added: Choice Layout option for Checkboxes and Multiple Choice fields (under Advanced Options)
+* Added: Full and expanded column class/grid support
+* Changed: Refactored CSS column classes, previous classes are deprecated
+* Fixed: Form ending with column classes not closing correctly
+* Fixed: reCAPTCHA button overlaying submit button preventing it from being clicked
+
+= 1.2.0.1 =
+* Changed: Improved field and column gutter consistency 
+
+= 1.2.0 =
+* Added: Form preview
+* Added: Column classes for Checkbox and Multiple choice inputs
+* Changed: Some fields did not have the correct (unique) CSS ID, this has been corrected, which means custom styling may need to be adjusted
+* Changed: Removed nonce verification
 
 = 1.1.8.4 =
 * Changed: Form notification settings hide if set to Off

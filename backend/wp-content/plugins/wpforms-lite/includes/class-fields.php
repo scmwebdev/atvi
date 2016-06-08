@@ -59,6 +59,8 @@ class WPForms_Fields {
 
 			if ( file_exists( WPFORMS_PLUGIN_DIR . 'includes/fields/class-' . $field . '.php' ) ) {
 				require_once WPFORMS_PLUGIN_DIR . 'includes/fields/class-' . $field . '.php';
+			} elseif ( file_exists( WPFORMS_PLUGIN_DIR . 'pro/includes/fields/class-' . $field . '.php' ) ) {
+				require_once WPFORMS_PLUGIN_DIR . 'pro/includes/fields/class-' . $field . '.php';
 			}
 		}
 	}

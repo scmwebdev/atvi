@@ -66,7 +66,7 @@ var wpf = {
 			fields         = formData.fields,
 			fieldOrder     = [],
 			fieldsOrdered  = new Array(),
-			fieldBlacklist = ['html','divider','file-upload'];
+			fieldBlacklist = ['html','divider','pagebreak'];
 
 		if (!fields) {
 			return false;
@@ -105,16 +105,16 @@ var wpf = {
 	/**
 	 * todo: get a single field
 	 *
-	 * @since 1.0.1
+	 * @since 1.1.10
 	 * @param {[type]} id
 	 * @param {[type]} key
 	 * @return {[type]}
 	 */
 	getField: function(id,key) {
-
+		// @todo
 	},
 
-	// hasField
+	// hasField @todo
 
 	/**
 	 * Remove items from an array.

@@ -5,7 +5,7 @@
  * Description: Beginner friendly WordPress contact form plugin. Use our Drag & Drop form builder to create your WordPress forms.
  * Author:      WPForms
  * Author URI:  https://wpforms.com
- * Version:     1.1.8.4
+ * Version:     1.2.2.2
  * Text Domain: wpforms
  * Domain Path: languages
  *
@@ -32,13 +32,40 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+// Don't allow multiple versions to be active
+if ( class_exists( 'WPForms' ) ) :
+
+	/**
+	 * Deactivate if WPForms already activated.
+	 *
+	 * @since 1.0.0
+	 */
+	function wpforms_deactivate() {
+		deactivate_plugins( plugin_basename( __FILE__ ) );
+	}
+	add_action( 'admin_init', 'wpforms_deactivate' );
+	
+	/**
+	 * Display notice after deactivation.
+	 *
+	 * @since 1.0.0
+	 */
+	function wpforms_lite_notice() {
+		echo '<div class="notice notice-warning"><p>' . __( 'Please deactivate WPForms Lite before activating WPForms', 'wpforms' ) . '</p></div>';
+		if ( isset( $_GET['activate'] ) )
+			unset( $_GET['activate'] );
+	}
+	add_action( 'admin_notices', 'wpforms_lite_notice' );
+
+else :
+
 /**
  * Main WPForms class
  *
  * @since 1.0.0
  * @package WPForms
  */
-final class WPForms_Lite {
+final class WPForms {
 
 	/**
 	 * One is the loneliest number that you'll ever do.
@@ -54,7 +81,7 @@ final class WPForms_Lite {
 	 * @since 1.0.0
 	 * @var sting
 	 */
-	private $version = '1.1.8.4';
+	public $version = '1.2.2.2';
 
 	/**
 	 * The form data handler instance.
@@ -63,6 +90,22 @@ final class WPForms_Lite {
 	 * @since 1.0.0
 	 */
 	public $form;
+
+	/**
+	 * The entry data handler instance (Pro).
+	 *
+	 * @var object WPForms_Entry_Handler
+	 * @since 1.0.0
+	 */
+	public $entry;
+
+	/**
+	 * The entry meta data handler instance (Pro).
+	 *
+	 * @var object WPForms_Entry_Meta_Handler
+	 * @since 1.1.6
+	 */
+	public $entry_meta;
 
 	/**
 	 * The front-end instance.
@@ -97,6 +140,22 @@ final class WPForms_Lite {
 	public $logs;
 
 	/**
+	 * The Preview instance.
+	 *
+	 * @var object WPForms_Preview
+	 * @since 1.1.9
+	 */
+	public $preview;
+
+	/**
+	 * The License class instance (Pro).
+	 *
+	 * @var object WPForms_License
+	 * @since 1.0.0
+	 */
+	public $license;
+
+	/**
 	 * Main WPForms Instance.
 	 *
 	 * Insures that only one instance of WPForms exists in memory at any one
@@ -107,12 +166,19 @@ final class WPForms_Lite {
 	 */
 	public static function instance() {
 
-		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof WPForms_Lite ) ) {
+		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof WPForms ) ) {
 
-			self::$instance = new WPForms_Lite;
+			self::$instance = new WPForms;
 			self::$instance->constants();
 			self::$instance->load_textdomain();
 			self::$instance->includes();
+
+			// Load Pro or Lite specific files
+			if ( file_exists( WPFORMS_PLUGIN_DIR . 'pro/wpforms-pro.php' ) ) {
+				require_once WPFORMS_PLUGIN_DIR . 'pro/wpforms-pro.php';
+			} else {
+				require_once WPFORMS_PLUGIN_DIR . 'lite/wpforms-lite.php';
+			}
 
 			add_action( 'plugins_loaded', array( self::$instance, 'objects' ), 10 );
 		}
@@ -129,7 +195,6 @@ final class WPForms_Lite {
 		// Global includes
 		require_once WPFORMS_PLUGIN_DIR . 'includes/functions.php';
 		require_once WPFORMS_PLUGIN_DIR . 'includes/class-install.php';
-		require_once WPFORMS_PLUGIN_DIR . 'includes/class-db.php';
 		require_once WPFORMS_PLUGIN_DIR . 'includes/class-form.php';
 		require_once WPFORMS_PLUGIN_DIR . 'includes/class-fields.php';
 		require_once WPFORMS_PLUGIN_DIR . 'includes/class-frontend.php';
@@ -144,14 +209,11 @@ final class WPForms_Lite {
 		// Admin/Dashboard only includes
 		if ( is_admin() ) {
 			require_once WPFORMS_PLUGIN_DIR . 'includes/admin/class-menu.php';
-			require_once WPFORMS_PLUGIN_DIR . 'includes/admin/class-settings.php';
 			require_once WPFORMS_PLUGIN_DIR . 'includes/admin/overview/class-overview.php';
 			require_once WPFORMS_PLUGIN_DIR . 'includes/admin/builder/class-builder.php';
 			require_once WPFORMS_PLUGIN_DIR . 'includes/admin/class-welcome.php';
 			require_once WPFORMS_PLUGIN_DIR . 'includes/admin/class-editor.php';
 			require_once WPFORMS_PLUGIN_DIR . 'includes/admin/ajax-actions.php';
-			require_once WPFORMS_PLUGIN_DIR . 'includes/admin/class-upgrades.php';
-			require_once WPFORMS_PLUGIN_DIR . 'lite/lite.php';
 		}
 	}
 
@@ -168,6 +230,7 @@ final class WPForms_Lite {
 		$this->process      = new WPForms_Process;
 		$this->smart_tags   = new WPForms_Smart_Tags;
 		$this->logs         = new WPForms_Logging;
+		$this->preview      = new WPForms_Preview;
 
 		// Hook now that all of the WPForms stuff is loaded.
 		do_action( 'wpforms_loaded' );
@@ -225,6 +288,8 @@ final class WPForms_Lite {
  */
 function wpforms() {
 
-	return WPForms_Lite::instance();
+	return WPForms::instance();
 }
 wpforms();
+
+endif;

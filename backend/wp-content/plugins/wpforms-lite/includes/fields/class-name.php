@@ -219,7 +219,7 @@ class WPForms_Field_Name extends WPForms_Field {
 			printf( '<div class="wpforms-field-row %s">', $field_class );
 
 				// First name
-				printf( '<div class="wpforms-field-row-block wpforms-%s">', $columns );
+				printf( '<div class="wpforms-field-row-block wpforms-%s wpforms-first">', $columns );
 
 					$first_class  = 'wpforms-field-name-first';
 					$first_class .= !empty( $field_required ) ? ' wpforms-field-required' : '';
@@ -228,7 +228,7 @@ class WPForms_Field_Name extends WPForms_Field {
 					printf( 
 						'<input type="text" name="wpforms[fields][%d][first]" id="%s" class="%s" placeholder="%s" value="%s" %s>',
 						$field['id'],
-						"wpforms-field_{$field['id']}",
+						"wpforms-{$form_id}-field_{$field['id']}",
 						$first_class,
 						$first_placeholder,
 						$first_default,
@@ -236,10 +236,10 @@ class WPForms_Field_Name extends WPForms_Field {
 					);
 
 					if ( !empty( wpforms()->process->errors[$form_id][$field['id']]['first'] ) ) {
-						printf( '<label id="wpforms-field_%d-error" class="wpforms-error" for="wpforms-field_%d">%s</label>', $field['id'], $field['id'], esc_html( wpforms()->process->errors[$form_id][$field['id']]['first'] ) );
+						printf( '<label id="wpforms-%d-field_%d-error" class="wpforms-error" for="wpforms-field_%d">%s</label>', $form_id, $field['id'], $field['id'], esc_html( wpforms()->process->errors[$form_id][$field['id']]['first'] ) );
 					}
 			
-					printf( '<label for="wpforms-field_%d" class="wpforms-field-sublabel %s">%s</label>', $field['id'], $field_sublabel, __( 'First', 'wpforms' ) );
+					printf( '<label for="wpforms-%d-field_%d" class="wpforms-field-sublabel %s">%s</label>', $form_id, $field['id'], $field_sublabel, __( 'First', 'wpforms' ) );
 
 				echo '</div>';
 
@@ -251,20 +251,20 @@ class WPForms_Field_Name extends WPForms_Field {
 						printf( 
 							'<input type="text" name="wpforms[fields][%d][middle]" id="%s" class="%s" placeholder="%s" value="%s">',
 							$field['id'],
-							"wpforms-field_{$field['id']}-middle",
+							"wpforms-{$form_id}-field_{$field['id']}-middle",
 							'wpforms-field-name-middle',
 							$middle_placeholder,
 							$middle_default
 						);
 						
-						printf( '<label for="wpforms-field_%d-middle" class="wpforms-field-sublabel %s">%s</label>', $field['id'], $field_sublabel, __( 'Middle', 'wpforms' ) );
+						printf( '<label for="wpforms-%d-field_%d-middle" class="wpforms-field-sublabel %s">%s</label>', $form_id, $field['id'], $field_sublabel, __( 'Middle', 'wpforms' ) );
 
 					echo '</div>';
 
 				endif;
 
 				// Last name
-				printf( '<div class="wpforms-field-row-block wpforms-%s wpforms-last">', $columns );
+				printf( '<div class="wpforms-field-row-block wpforms-%s">', $columns );
 
 					$last_class  = 'wpforms-field-name-last';
 					$last_class .= !empty( $field_required ) ? ' wpforms-field-required' : '';
@@ -273,7 +273,7 @@ class WPForms_Field_Name extends WPForms_Field {
 					printf( 
 						'<input type="text" name="wpforms[fields][%d][last]" id="%s" class="%s" placeholder="%s" value="%s" %s>',
 						$field['id'],
-						"wpforms-field_{$field['id']}-last",
+						"wpforms-{$form_id}-field_{$field['id']}-last",
 						$last_class,
 						$last_placeholder,
 						$last_default,
@@ -281,10 +281,10 @@ class WPForms_Field_Name extends WPForms_Field {
 					);
 
 					if ( !empty( wpforms()->process->errors[$form_id][$field['id']]['last'] ) ) {
-						printf( '<label id="wpforms-field_%d-error" class="wpforms-error" for="wpforms-field_%d">%s</label>', $field['id'], $field['id'], esc_html( wpforms()->process->errors[$form_id][$field['id']]['last'] ) );
+						printf( '<label id="wpforms-%d-field_%d-error" class="wpforms-error" for="wpforms-field_%d">%s</label>', $form_id, $field['id'], $field['id'], esc_html( wpforms()->process->errors[$form_id][$field['id']]['last'] ) );
 					}
 					
-					printf( '<label for="wpforms-field_%d-last" class="wpforms-field-sublabel %s">%s</label>', $field['id'], $field_sublabel, __( 'Last', 'wpforms' ) );
+					printf( '<label for="wpforms-%d-field_%d-last" class="wpforms-field-sublabel %s">%s</label>', $form_id, $field['id'], $field_sublabel, __( 'Last', 'wpforms' ) );
 
 				echo '</div>';
 

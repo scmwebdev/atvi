@@ -6,7 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-// enqueue and localize JS for IMG tag replacement
+/**
+ * Enqueue and localize JS for IMG tag replacement
+ */
 add_action( 'wp_enqueue_scripts', 'bodhi_svgs_inline' );
 
 function bodhi_svgs_inline() {
@@ -20,31 +22,34 @@ function bodhi_svgs_inline() {
 	} else {
 		wp_register_script('bodhi_svg_inline', plugins_url('svg-support/js/min/svg-inline-min.js'), array('jquery'), '1.0.0', false );
 	}
+
 	wp_enqueue_script('bodhi_svg_inline');
 	wp_localize_script( 'bodhi_svg_inline', 'cssTarget', $css_target );
 
 }
 
-// check if we're on our settings page for conditional loading
-function bodhi_svgs_settings_page_only() {
+/**
+ * Enqueue CSS for settings page and media library
+ */
+function bodhi_svgs_specific_pages_only() {
 
-    $screen = get_current_screen();
+	$screen = get_current_screen();
+	// check which page we're on - our settings page or the media library
+	if ( is_object($screen) && $screen->id == 'settings_page_svg-support' || is_object($screen) && $screen->id == 'upload' ) {
+		return true;
+	} else {
+		return false;
+	}
 
-    if( is_object($screen) && $screen->id == 'settings_page_svg-support' ) {
-        return true;
-    } else {
-        return false;
-    }
-    
 }
 
-// enqueue admin settings css only on our settings page
-add_action( 'admin_enqueue_scripts', 'bodhi_svgs_admin_style' );
+// enqueue our admin css only on our settings page or the media library
+add_action( 'admin_enqueue_scripts', 'bodhi_svgs_admin_css' );
 
-function bodhi_svgs_admin_style() {
+function bodhi_svgs_admin_css() {
 
-	if( bodhi_svgs_settings_page_only() ) {
-		wp_enqueue_style( 'bodhi_svgs_admin_style', plugins_url('svg-support/css/svgs-admin.css') );
+	if( bodhi_svgs_specific_pages_only() ) {
+		wp_enqueue_style( 'bodhi_svgs_admin_css', plugins_url('svg-support/css/svgs-admin.css') );
 	}
 
 }

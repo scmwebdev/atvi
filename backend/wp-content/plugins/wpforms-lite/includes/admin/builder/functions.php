@@ -33,8 +33,10 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 	$parent      = !empty( $args['parent'] ) ? esc_attr( $args['parent'] ) : '';
 	$label       = !empty( $label ) ? esc_html( $label ) : '';
 	$class       = !empty( $args['class'] ) ? esc_attr( $args['class'] ) : '';
-	$default     = !empty( $args['default'] ) ? $args['default'] : '';
+	$input_class = !empty( $args['input_class'] ) ? esc_attr( $args['input_class'] ) : '';
+	$default     = isset( $args['default'] ) ? $args['default'] : '';
 	$placeholder = !empty( $args['placeholder'] ) ? esc_attr( $args['placeholder'] ) : '';
+	$data_attr   = '';
 
 	// Check if we should store values in a parent array
 	if ( !empty( $parent ) ) {
@@ -45,6 +47,13 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 		$value      = isset( $form_data[$panel][$field] ) ? $form_data[$panel][$field] : $default;
 	}
 
+	// Check for data attributes
+	if ( !empty( $args['data'] ) ) {
+		foreach ( $args['data'] as $key => $val ) {
+		  $data_attr .= ' data-' . $key . '="' . $val . '"';
+		}
+	}
+
 	// Determine what field type to output
 	switch ( $option ) {
 
@@ -52,13 +61,15 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 		case 'text':
 			$type   = !empty( $args['type'] ) ? esc_attr( $args['type'] ) : 'text';
 			$output = sprintf( 
-				'<input type="%s" id="wpforms-panel-field-%s-%s" name="%s" value="%s" placeholder="%s">', 
+				'<input type="%s" id="wpforms-panel-field-%s-%s" name="%s" value="%s" placeholder="%s" class="%s" %s>', 
 				$type,
 				sanitize_html_class( $panel ), 
 				sanitize_html_class( $field ),
 				$field_name,
 				esc_attr( $value ),
-				$placeholder
+				$placeholder,
+				$input_class,
+				$data_attr
 			);
 			break;
 
@@ -66,12 +77,14 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 		case 'textarea':
 			$rows   = !empty( $args['rows'] ) ? (int) $args['rows'] : '3';
 			$output = sprintf( 
-				'<textarea id="wpforms-panel-field-%s-%s" name="%s" rows="%d" placeholder="%s">%s</textarea>',
+				'<textarea id="wpforms-panel-field-%s-%s" name="%s" rows="%d" placeholder="%s" class="%s" %s>%s</textarea>',
 				sanitize_html_class( $panel ), 
 				sanitize_html_class( $field ),
 				$field_name,
 				$rows,
 				$placeholder,
+				$input_class,
+				$data_attr,
 				esc_textarea( $value )
 			);
 			break;
@@ -95,11 +108,13 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 		case 'checkbox':
 			$checked = checked( '1', $value, false );
 			$output  = sprintf( 
-				'<input type="checkbox" id="wpforms-panel-field-%s-%s" name="%s" value="1" %s>',
+				'<input type="checkbox" id="wpforms-panel-field-%s-%s" name="%s" value="1" class="%s" %s %s>',
 				sanitize_html_class( $panel ), 
 				sanitize_html_class( $field ),
 				$field_name,
-				$checked
+				$input_class,
+				$checked,
+				$data_attr
 			);
 			$output .= sprintf( 
 				'<label for="wpforms-panel-field-%s-%s" class="inline">%s',
@@ -115,16 +130,35 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 
 		// Select
 		case 'select':
-			if ( empty( $args['options'] ) ) {
+			if ( empty( $args['options'] ) && empty( $args['field_map'] ) ) {
 				return;
 			}
-			$options = $args['options'];
+
+			if ( !empty( $args['field_map'] ) ) {
+				$options = array();
+				$available_fields = wpforms_get_form_fields( $form_data, $args['field_map']  );
+				foreach ( $available_fields as $id => $available_field ) {
+					$lbl = !empty( $available_field['label'] ) ? esc_attr( $available_field['label'] ) : __( 'Field #') . $id;
+					$options[$id] = $lbl;
+				}
+				$input_class .= ' wpforms-field-map-select';
+				$data_attr   .= ' data-field-map-allowed="' . implode( ' ', $args['field_map'] ) . '"';
+			} else {
+				$options = $args['options'];
+			}
+
 			$output  = sprintf( 
-				'<select id="wpforms-panel-field-%s-%s" name="%s" >',
+				'<select id="wpforms-panel-field-%s-%s" name="%s" class="%s" %s>',
 				sanitize_html_class( $panel ), 
 				sanitize_html_class( $field ),
-				$field_name
+				$field_name,
+				$input_class,
+				$data_attr
 			);
+				if ( !empty( $placeholder ) ) {
+					$output .= '<option value="">' . $placeholder . '</option>';
+				}
+
 				foreach ( $options as $key => $option ) {
 					$output .= sprintf( '<option value="%s" %s>%s</option>', esc_attr( $key ), selected( $key, $value, false ), $option );
 				}
@@ -154,7 +188,7 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 		if ( !empty( $args['after_tooltip'] ) ) {
 			$field_label .= $args['after_tooltip'];
 		}
-		if( !empty( $args['smarttags'] ) ) {
+		if ( !empty( $args['smarttags'] ) ) {
 	
 			$type   = !empty( $args['smarttags']['type'] ) ? esc_attr( $args['smarttags']['type'] ) : 'fields';
 			$fields = !empty( $args['smarttags']['fields'] ) ? esc_attr( $args['smarttags']['fields'] ) : '';

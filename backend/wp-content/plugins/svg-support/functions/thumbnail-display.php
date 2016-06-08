@@ -9,15 +9,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_action('admin_init', 'bodhi_svgs_display_thumbs');
 
 function bodhi_svgs_display_thumbs() {
-	
+
 	ob_start();
 
 	add_action( 'shutdown', 'bodhi_svgs_thumbs_filter', 0 );
 	function bodhi_svgs_thumbs_filter() {
-	    
+
 	    $final = '';
 	    $ob_levels = count( ob_get_level() );
-	    
+
 	    for ( $i = 0; $i < $ob_levels; $i++ ) {
 
 	        $final .= ob_get_clean();
@@ -36,7 +36,7 @@ function bodhi_svgs_display_thumbs() {
 			'<# } else if ( \'svg+xml\' === data.subtype ) { #>
 				<img class="details-image" src="{{ data.url }}" draggable="false" />
 				<# } else if ( \'image\' === data.type && data.sizes && data.sizes.full ) { #>',
-			
+
 			$content
 		);
 
@@ -47,7 +47,7 @@ function bodhi_svgs_display_thumbs() {
 					<img src="{{ data.url }}" class="thumbnail" draggable="false" />
 				</div>
 			<# } else if ( \'image\' === data.type && data.sizes ) { #>',
-			
+
 			$content
 		);
 

@@ -37,6 +37,7 @@ What this plugin does is to reveal most removed entry IDs on admin pages, showin
 * Romanian (ro_RO) (Thanks for contributing romanian language goes to [Anunturi Jibo](http://www.jibo.ro))
 * Georgian (ge_KA) (Thanks for contributing georgian language goes to [Online Casino Bluebook](http://www.onlinecasinobluebook.com/))
 * Swedish (sv_SE) (Thanks for contributing swedish language goes to [Tor-Bjorn Fjellner](http://fjellner.com/))
+* Ukrainian (uk) (Thanks for contributing ukrainian language goes to [Everycloud](http://www.everycloudtech.com/))
 
 **Looking for more WordPress plugins? Visit [www.schloebe.de/portfolio/](http://www.schloebe.de/portfolio/)**
 
@@ -52,6 +53,9 @@ None.
 1. Installation finished.
 
 == Changelog ==
+
+= 1.4.6.2 =
+* Added ukrainian localization (Thanks to Alisa Bagrii!)
 
 = 1.4.6.1 =
 * Backend cleanup

@@ -91,6 +91,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 		$show_values = $this->field_element( 'checkbox', $field, array( 'slug' => 'show_values', 'value' => $show_values, 'desc' => __( 'Show Values', 'wpforms' ), 'tooltip' => $tooltip ), false );
 		$this->field_element( 'row',        $field, array( 'slug' => 'show_values', 'content' => $show_values ) );
 
+		$this->field_option( 'input_columns',    $field );
 		$this->field_option( 'label_hide',       $field );
 		$this->field_option( 'css',              $field );
 		$this->field_option( 'advanced-options', $field, array( 'markup' => 'close' ) );
@@ -134,6 +135,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 		$field_class       = implode( ' ', array_map( 'sanitize_html_class', $field_atts['input_class'] ) );
 		$field_id          = implode( ' ', array_map( 'sanitize_html_class', $field_atts['input_id'] ) );
 		$field_data        = '';	
+		$form_id           = $form_data['id'];
 
 		if ( !empty( $field_atts['input_data'] ) ) {
 			foreach ( $field_atts['input_data'] as $key => $val ) {
@@ -147,7 +149,8 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 				$selected = isset( $choice['default'] ) ? '1' : '0' ;
 				$val      = isset( $field['show_values'] ) ?  esc_attr( $choice['value'] ) : esc_attr( $choice['label'] );
 				printf( '<li class="choice-%d">', $key );
-					printf( '<input type="checkbox" id="wpforms-field_%d_%d" name="wpforms[fields][%d][]" value="%s" %s %s>',
+					printf( '<input type="checkbox" id="wpforms-%d-field_%d_%d" name="wpforms[fields][%d][]" value="%s" %s %s>',
+						$form_id, 
 						$field['id'],
 						$key,
 						$field['id'],
@@ -155,7 +158,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 						checked( '1', $selected, false ),
 						$field_required
 					);
-					printf( '<label class="wpforms-field-label-inline" for="wpforms-field_%d_%d">%s</label>', $field['id'], $key, wp_kses_post( $choice['label'] ) );
+					printf( '<label class="wpforms-field-label-inline" for="wpforms-%d-field_%d_%d">%s</label>', $form_id, $field['id'], $key, wp_kses_post( $choice['label'] ) );
 				echo '</li>';
 			}
 		echo '</ul>';
