@@ -364,3 +364,33 @@ function get_events($maxPost) {
 
 }
 
+/* ==================================================================
+ * Get Main Banner
+ * ================================================================== */
+
+function get_main_banner() {
+
+  for($i = 1; $i <= 4; $i++) { 
+    $slider =  ${'slider_'.$i} = get_field("slider_" . $i);
+    $slider_url =  ${'slider_'.$i.'_url'} = get_field("slider_" . $i.'_url');
+
+    if ($slider) {
+      echo '<div class="carousel clearfix" id="atvi-carousel">';
+        echo '<div class="carousel-slider-' . $i . '>';
+
+        if(wpmd_is_phone()) {
+          echo '<a href="'. $slider_url .'">';
+          echo wp_get_attachment_image( $slider, 'mainBanner_xs' );
+          echo '</a>';
+        } else {
+          echo '<a href="'. $slider_url .'">';
+          echo wp_get_attachment_image( $slider, 'mainBanner_lg' );
+          echo '</a>';  
+        }
+        echo '</div';
+      echo '</div';
+    }
+
+  } //endfor
+
+}
