@@ -6,16 +6,9 @@
  */
 
 get_header(); ?>
-<div id="primary" class="content-area <?php echo get_the_title() ?> frontpage">
+<div id="primary" class="content-area clearfix <?php echo get_the_title() ?> frontpage">
 	<main id="main" class="site-main clearfix" role="main">
-		<?php 
-
-			if (has_post_thumbnail()) {
-				the_post_thumbnail();
-			} else {
-				get_main_banner();
-			}
-		?>
+		<?php (has_post_thumbnail()) ? main_featured() : get_main_banner(); ?>
 		<div class="segment highlight __spacepad">
 			<div class="container">
 				<div class="segment-header">
@@ -28,19 +21,19 @@ get_header(); ?>
 					$tagline_desc =  ${'tagline_desc_'.$i} = get_field("tagline_desc_" . $i);
 					$tagline_img =  ${'tagline_img_'.$i} = get_field("tagline_img_" . $i);
 				?>
-				<div class="item-list col-xs-6 col-sm-4 __spacepad">
+				<div class="item-list col-xs-6 col-sm-4">
 					<div class="item-list-container clearfix">
 						<div class="item-list-icon col-xs-12 col-sm-4">
 							<img class="img-responsive" src="<?php echo $tagline_img; ?>" alt="">
 						</div>
 						<div class="item-list-desc col-xs-12 col-sm-8">
 							<div class="item-list-desc-title">
-								<h3 class="title"><?php echo $tagline; ?></h3>
+								<div class="title"><?php echo $tagline; ?></div>
 							</div>
 
 							<?php if(wpmd_is_notdevice()) { ?>
 							<div class="item-list-desc-text">
-								<p class="__nomarginbottom"><?php echo $tagline_desc; ?></p>
+								<p class="no-margin-bottom"><?php echo $tagline_desc; ?></p>
 							</div>
 							<?php } ?>
 						</div>
@@ -92,15 +85,17 @@ get_header(); ?>
 		<div class="segment warta-berita __spacepad">
 			<div class="container spacepad">
 				<div class="segment-header warta-berita-header">
-					<h2 class="title">Ikuti Event & Berita Terbaru tentang ATVI</h2>
-					<ul class="nav nav-pills" id="warta-berita-controller">
+					<h2 class="title">Berita & Event Terbaru ATVI</h2>
+					<ul class="nav nav-pills no-spacepad-side" id="warta-berita-controller">
 					  <li role="presentation" data-warta="news" class="active"><a>Berita</a></li>
 					  <li role="presentation" data-warta="events"><a>Events</a></li>
 					</ul>
-					<hr>
+				</div>
+				<div class="segment-content">
+					
 				</div>
 			</div>
-			<div class="warta-berita-post">
+			<!-- <div class="warta-berita-post">
 				<div class="container">
 				<div class="post-latest __spacepad clearfix toggled" id="atvi-news">
 						<div class="item clearfix">
@@ -202,7 +197,7 @@ get_header(); ?>
 				</div>
 					
 				</div>
-			</div>
+			</div> -->
 		</div>
 		<!-- <div class="video video-latest __spacepad">
 			<div class="container">

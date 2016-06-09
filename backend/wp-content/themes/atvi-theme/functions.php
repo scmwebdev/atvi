@@ -368,7 +368,7 @@ function get_events($maxPost) {
  * Get Main Banner
  * ================================================================== */
 
-function get_main_banner() {
+function main_carousel() {
 
   for($i = 1; $i <= 4; $i++) { 
     $slider =  ${'slider_'.$i} = get_field("slider_" . $i);
@@ -393,4 +393,9 @@ function get_main_banner() {
 
   } //endfor
 
+}
+
+function main_featured() {
+
+  (wpmd_is_phone()) ? the_post_thumbnail('mainBanner_xs') : the_post_thumbnail('mainBanner_lg') ;
 }
