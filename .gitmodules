@@ -1,0 +1,3 @@
+[submodule "backend/wp-content/themes/atvi-theme/lib/sass"]
+	path = backend/wp-content/themes/atvi-theme/lib/sass
+	url = git@github.com:enoa7/sass.git
