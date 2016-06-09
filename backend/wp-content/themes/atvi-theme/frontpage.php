@@ -9,7 +9,7 @@ get_header(); ?>
 <div id="primary" class="content-area clearfix <?php echo get_the_title() ?> frontpage">
 	<main id="main" class="site-main clearfix" role="main">
 		<?php (has_post_thumbnail()) ? main_featured() : get_main_banner(); ?>
-		<div class="segment highlight __spacepad">
+		<div class="segment highlight spacepad-15">
 			<div class="container">
 				<div class="segment-header">
 					<h2 class="title">ATVI</h2>
@@ -43,7 +43,7 @@ get_header(); ?>
 				</div>
 			</div>
 		</div>
-		<div class="segment penjurusan __spacepad">
+		<div class="segment penjurusan spacepad-15">
 			<div class="container">
 				<div class="segment-header">
 					<h2 class="title">Penjurusan</h2>
@@ -57,7 +57,7 @@ get_header(); ?>
 						$jurusan2_img = get_field('jurusan_2_img');
 					?>
 
-					<div class="item-list col-xs-12 col-sm-6 __spacepad">
+					<div class="item-list col-xs-12 col-sm-6 spacepad-15">
 						<div class="item-list-container">
 							<div class="item-list-icon">
 								<?php echo file_get_contents($jurusan1_img); ?>
@@ -68,7 +68,7 @@ get_header(); ?>
 						</div>
 					</div>
 
-					<div class="item-list col-xs-12 col-sm-6 __spacepad">
+					<div class="item-list col-xs-12 col-sm-6 spacepad-15">
 						<div class="item-list-container">
 							<div class="item-list-icon">
 							<?php echo file_get_contents($jurusan2_img); ?>
@@ -82,7 +82,7 @@ get_header(); ?>
 				</div>
 			</div>
 		</div>
-		<div class="segment warta-berita __spacepad">
+		<div class="segment warta-berita spacepad-15">
 			<div class="container spacepad">
 				<div class="segment-header warta-berita-header">
 					<h2 class="title">Berita & Event Terbaru ATVI</h2>
@@ -97,7 +97,7 @@ get_header(); ?>
 			</div>
 			<!-- <div class="warta-berita-post">
 				<div class="container">
-				<div class="post-latest __spacepad clearfix toggled" id="atvi-news">
+				<div class="post-latest spacepad-15 clearfix toggled" id="atvi-news">
 						<div class="item clearfix">
 						<?php
 
@@ -145,7 +145,7 @@ get_header(); ?>
 							</div>
 						</div>
 					</div>
-				<div class="post-latest __spacepad clearfix" id="atvi-events">
+				<div class="post-latest spacepad-15 clearfix" id="atvi-events">
 					<div class="item clearfix">
 					<?php
 
@@ -199,10 +199,10 @@ get_header(); ?>
 				</div>
 			</div> -->
 		</div>
-		<!-- <div class="video video-latest __spacepad">
+		<!-- <div class="video video-latest spacepad-15">
 			<div class="container">
 				<h2 class="title text-center">Latest Video</h2>
-				<div class="item clearfix __spacepad">
+				<div class="item clearfix spacepad-15">
 					<?php
 						$args = array(
 								'posts_per_page' => 6,
@@ -233,10 +233,10 @@ get_header(); ?>
 					</div>
 			</div>
 		</div>
-		<div class="message __spacepad">
+		<div class="message spacepad-15">
 			<div class="container">
 				<h2 class="title text-center">Pesan dari Direktur</h2>
-				<div class="message-container clearfix __spacepad">
+				<div class="message-container clearfix spacepad-15">
 					<div class="message-photo col-xs-12 col-sm-4">
 						<div class="wrap">
 							<?php 
@@ -254,12 +254,12 @@ get_header(); ?>
 				</div>
 			</div>
 		</div>
-		<div class="warta-berita __spacepad">
+		<div class="warta-berita spacepad-15">
 			<div class="container">
 				
 			</div>
 		</div>
-		<div class="testimonial __spacepad">
+		<div class="testimonial spacepad-15">
 			<div class="container">
 				
 			</div>
