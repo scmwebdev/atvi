@@ -335,7 +335,7 @@ function get_post_query($cat, $maxPost, $postType = 'post') {
 
 function get_events($maxPost) {
 
-  $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+  $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;  
   $args = array( 
     'post_type'       => 'ai1ec_event',
     'posts_per_page'  => $maxPost,
@@ -360,8 +360,38 @@ function get_events($maxPost) {
     echo 'Maaf, tidak ada post!';
   }
   wp_reset_postdata();
+}
 
+function get_latest($content, $maxPost) {
+  // $args;
+  if ($content == 'berita') {
+    $args = array( 
+      'cat'             => 8,
+      'posts_per_page'  => $maxPost,
+      'order'           => 'DESC',
+    );
+  } elseif ($content == 'event') {
+    $args = array( 
+      'post_type'       => 'ai1ec_event',
+      'posts_per_page'  => $maxPost,
+      'order'           => 'DESC',
+    );
+  }
 
+  $the_query = new WP_Query( $args );
+
+  // The Loop
+  if ( $the_query->have_posts() ) {
+    echo '<div class="item item-post">';
+    while ( $the_query->have_posts() ) {
+      $the_query->the_post();
+      get_template_part( 'template-parts/atvi', 'latest' );
+    }
+    echo '</div>';
+  } else {
+    echo 'Maaf, tidak ada post!';
+  }
+  wp_reset_postdata();
 }
 
 /* ==================================================================

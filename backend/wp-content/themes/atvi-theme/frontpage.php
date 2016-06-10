@@ -82,122 +82,33 @@ get_header(); ?>
 				</div>
 			</div>
 		</div>
-		<div class="segment warta-berita spacepad-15">
-			<div class="container spacepad">
+		<div class="segment spacepad-15" id="warta-berita">
+			<div class="<?php echo (wpmd_is_notdevice()) ? 'container' : ' '; ?> spacepad">
 				<div class="segment-header warta-berita-header">
 					<h2 class="title">Berita & Event Terbaru ATVI</h2>
-					<ul class="nav nav-pills no-spacepad-side" id="warta-berita-controller">
+					<ul class="nav nav-tabs nav-justified no-spacepad-side" id="warta-berita-controller">
 					  <li role="presentation" data-warta="news" class="active"><a>Berita</a></li>
 					  <li role="presentation" data-warta="events"><a>Events</a></li>
 					</ul>
 				</div>
-				<div class="segment-content">
-					
-				</div>
-			</div>
-			<!-- <div class="warta-berita-post">
-				<div class="container">
-				<div class="post-latest spacepad-15 clearfix toggled" id="atvi-news">
-						<div class="item clearfix">
-						<?php
-
-							//grab post with berita category
-							$args = array( 
-								'cat' 				=> 8,
-								'posts_per_page'	=> '3',
-							);
-
-							// The Query
-							$event = new WP_Query( $args );
-
-							// The Loop
-							if ( $event->have_posts() ) {
-								while ( $event->have_posts() ) {
-									$event->the_post();
-									// get_template_part( 'template-parts/atvi', 'events' );
-									?>
-								<div class="item-list col-xs-12 col-sm-4">
-									<div class="item-list-container">
-										<div class="item-list-thumbnail __hovertype-2">
-											<a href="<?php the_permalink(); ?>">
-												<?php the_post_thumbnail('video_thumb', array('class' => 'img-responsive')); ?>
-											</a>
-										</div>
-										<div class="item-list-title">
-											<a href="<?php the_permalink(); ?>">
-												<p class="title"><?php the_title(); ?></p>
-											</a>
-										</div>
-										<div class="item-list-content">
-											<?php echo substr(get_the_excerpt(), 0, 250) . ' ...'?>
-										</div>
-									</div>
-								</div>
-							<?php	}
-							} else {
-								echo 'Maaf, tidak ada post!';
-							}
-							/* Restore original Post Data */
-							wp_reset_postdata();
-						?>
+				<div class="segment-content warta-berita-post">
+					<div class="container">
+						<div class="post-latest clearfix toggled" id="atvi-news">
+							<?php get_latest('berita', 4); ?>
 							<div class="atvi-btn __view-btn __view-btn-all">
 								<a href="<?php echo home_url() . '/warta-berita/berita/'?>" class="btn btn-primary" role="button">Lihat lebih lanjut</a>
 							</div>
 						</div>
-					</div>
-				<div class="post-latest spacepad-15 clearfix" id="atvi-events">
-					<div class="item clearfix">
-					<?php
-
-						//grab event post
-						$args = array( 
-							'post_type'			=> 'ai1ec_event',
-							'posts_per_page'	=> '3',
-						);
-
-						// The Query
-						$events_added = new WP_Query( $args );
-
-						// The Loop
-						if ( $events_added->have_posts() ) {
-							while ( $events_added->have_posts() ) {
-								$events_added->the_post();
-						?>
-
-							<div class="item-list col-xs-12 col-sm-4">
-								<div class="item-list-container">
-									<div class="item-list-thumbnail __hovertype-2">
-										<a href="<?php the_permalink(); ?>">
-											<?php the_post_thumbnail('video_thumb', array('class' => 'img-responsive')); ?>
-										</a>
-									</div>
-									<div class="item-list-title">
-										<a href="<?php the_permalink(); ?>">
-											<p class="title"><?php the_title(); ?></p>
-										</a>
-									</div>
-									<div class="item-list-content">
-										<?php echo substr(get_the_excerpt(), 0, 400) . ' ...' ?>
-									</div>
-								</div>
+						<div class="post-latest clearfix" id="atvi-events">
+							<?php get_latest('event', 4); ?>
+							<div class="atvi-btn __view-btn __view-btn-all">
+								<a href="<?php echo home_url() . '/warta-berita/event/'?>" class="btn btn-primary" role="button">Lihat lebih lanjut</a>
 							</div>
-
-						<?php	}
-						} else {
-							// no posts found
-						}
-						/* Restore original Post Data */
-						wp_reset_postdata();
-
-					?>
-					<div class="atvi-btn __view-btn __view-btn-all">
-						<a href="<?php echo home_url() . '/warta-berita/event/'?>" class="btn btn-primary" role="button">Lihat lebih lanjut</a>
-					</div>
+						</div>
 					</div>
 				</div>
-					
-				</div>
-			</div> -->
+			</div>
+			
 		</div>
 		<!-- <div class="video video-latest spacepad-15">
 			<div class="container">
